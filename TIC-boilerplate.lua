@@ -89,7 +89,7 @@ function pix(x,y,color)
         for i,p in ipairs(sweetie16) do 
             if p[1]==r and p[2]==g and p[3]==b then return i-1 end
         end 
-         return 0
+        return 0
     end
     love.graphics.setColor(sweetie16[math.floor(color+1)])
     love.graphics.points(x,y+1)

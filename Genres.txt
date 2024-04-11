@@ -1,0 +1,77 @@
+Slick Slices: arcade
+Multiple Maze: episodic
+Life of Tree: reactive
+5.5BUTTERF.EXE: butterfly
+8BUTTERF.EXE: butterfly
+Dropplet: arcade
+Vase: collectathon
+Panic Percussion: rhythmic
+psy-ball: maze
+ZETPACK-99: collectathon
+finding yourself in the forest: exploration
+PocketBolo: competitive
+Batch-3: combos
+Momentum: arcade
+decorate castle or go extinct.: creative
+Apoplex: tactical
+Sunray Valley: exploration
+Card Grangers DX: drafting
+Avarice: drafting
+C-A-T-C-H: collectathon
+
+----
+
+arcade
+    Slick Slices
+    Dropplet
+    Momentum
+collectathon
+    Vase
+    ZETPACK-99
+    C-A-T-C-H
+exploration
+    Sunray Valley
+    finding yourself in the forest
+butterfly
+    5.5BUTTERF.EXE
+    8BUTTERF.EXE
+drafting
+    Card Grangers DX
+    Avarice
+episodic
+    Multiple Maze
+reactive
+    Life of Tree
+creative
+    decorate castle or go extinct.
+maze
+    psy-ball
+rhythm
+    Panic Percussion
+competitive
+    PocketBolo
+combos
+    Batch-3
+
+----
+
+Slick Slices (0)
+    Life of Tree (20)
+        Dropplet (150)
+            Vase (60)
+            Panic Percussion (210)
+        psy-ball (80)
+            ZETPACK-99 (140)
+            finding yourself in the forest (400)
+    PocketBolo (30)
+        Batch-3 (120)
+            Momentum (240)
+            decorate castle or go extinct. (360)
+        Apoplex (180)
+            Sunray Valley (300)
+            Card Grangers DX (50)
+    5.5BUTTERF.EXE (900)
+        8BUTTERF.EXE (800)
+Multiple Maze (0)
+    Avarice (100)
+    C-A-T-C-H (95)

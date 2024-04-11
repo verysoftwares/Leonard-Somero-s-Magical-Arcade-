@@ -210,10 +210,10 @@ int palette_col(float r,float g,float b) {
 vec4 effect( vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords ){
     vec4 pixel = Texel(texture, texture_coords);
     int col_index=palette_col(pixel.r,pixel.g,pixel.b);
-    if (col_index==colorkey) { return vec4(0,0,0,0); }
+    if (col_index==colorkey) { return vec4(0,0,0, 0); }
     if (override_pal[col_index]!=col_index) {
         vec3 replace=sweetie16[override_pal[col_index] ];
-        return vec4(replace.r,replace.g,replace.b,1);
+        return vec4(replace.r,replace.g,replace.b, 1);
     }
     /*if (colorkey>=0 && colorkey<16 && pixel.r==sweetie16[colorkey].r && pixel.g==sweetie16[colorkey].g && pixel.b==sweetie16[colorkey].b) { return vec4(0,0,0,0); }*/
     return pixel * color;

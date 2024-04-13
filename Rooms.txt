@@ -3,3 +3,4 @@ Closet: The closets are full but there's nothing in them.
 Window: This apartment has 2-player windows.
 Fridge: Multiplayer fridge, up to 4 players.
 Faucet: It's just free money coming out of my faucet.
+Chair: Gamer chair. The most comfy kind of chair.

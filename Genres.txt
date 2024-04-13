@@ -73,9 +73,9 @@ Slick Slices (0)
             Sunray Valley (300)
             Card Grangers DX (50)
     5.5BUTTERF.EXE (900)
-        8BUTTERF.EXE (800)
+        8BUTTERF.EXE (888)
 Multiple Maze (0)
-    Avarice (100)
+    Avarice (110)
     C-A-T-C-H (95)
 
 So Slick Slices and Multiple Maze are the two games you start with, and you unlock more by finding diskettes and collecting cat paws for their entry fees.

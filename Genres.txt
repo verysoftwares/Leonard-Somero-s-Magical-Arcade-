@@ -55,7 +55,7 @@ combos
 
 ----
 
-Unlock order:
+Unlock order. The bracketed number means the amount of cat paws needed to unlock.
 
 Slick Slices (0)
     Life of Tree (20)

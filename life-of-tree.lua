@@ -84,12 +84,6 @@ function modal()
         local tw=print(headline,0,-12,0,false,2,false)
         print(headline,240/2-tw/2,136/2-16+ry+2,4,false,2,false)
     end
-    --if i==3 then
-        --local msg
-        --msg=msg or 'Text missing'
-        --local tw=print(msg,0,-6,0,false,1,true)
-        --print(msg,240/2-tw/2,136/2-16+ry,12,false,1,true)
-    --end
     if i==3 then
         local msg
         if year==1 and nextseason==summer then

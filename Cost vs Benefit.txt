@@ -32,6 +32,6 @@ Visual novel choices
     - Gotta write a lot of scripts for different choices, but it's manageable.
 
 Timer
-    (A timer counting down. The player has the option to fast forward and reverse.)
+    (A timer counting down to Maitreya's next appearance. The player has the option to fast forward and reverse.)
     + Illustrates the passing of time
     - May be difficult to integrate into gameplay

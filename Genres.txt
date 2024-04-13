@@ -55,6 +55,8 @@ combos
 
 ----
 
+Unlock order:
+
 Slick Slices (0)
     Life of Tree (20)
         Dropplet (150)
@@ -75,3 +77,5 @@ Slick Slices (0)
 Multiple Maze (0)
     Avarice (100)
     C-A-T-C-H (95)
+
+So Slick Slices and Multiple Maze are the two games you start with, and you unloock more by finding diskettes and collecting cat paws for their entry fees.

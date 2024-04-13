@@ -1,5 +1,5 @@
 function love.conf(t)
-    t.window.title = 'by verysoftwares.itch.io'         -- The window title (string)
+    t.window.title = 'Leonard Somero\'s Magical Arcade!'         -- The window title (string)
     t.window.icon = nil                 -- Filepath to an image to use as the window's icon (string)
     t.window.width = 960                -- The window width (number)
     t.window.height = 960               -- The window height (number)

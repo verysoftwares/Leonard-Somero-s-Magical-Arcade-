@@ -478,6 +478,7 @@ unlocks={'Slick Slices'}
 
 diskettes={{a=pi/2,genre='arcade'},{a=pi/2*3,genre='episodic'}}
 da=0
+timer=0
 function laptop_update()
     for i,d in ipairs(diskettes) do
         d.a=d.a+da
@@ -489,6 +490,7 @@ function laptop_update()
         if tapleft then da=-dspd end
         if taprite then da= dspd end
     end
+    timer=timer+1
 end
 
 function laptop_draw()

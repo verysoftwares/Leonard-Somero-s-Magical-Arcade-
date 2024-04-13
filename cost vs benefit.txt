@@ -20,3 +20,12 @@ Diskette stacks
 Maitreya
     + Drives the narrative forward.
     - Need someone to record with a green screen.
+
+Cognitohazards
+    + Yay for creepypasta
+    - May alienate some players
+
+Visual novel choices
+    + Reflection of how thoughts appear
+    + Relatable for visual novel fans
+    - Gotta write a lot of scripts for different choices, but it's manageable.

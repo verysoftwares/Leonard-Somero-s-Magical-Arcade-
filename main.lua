@@ -512,7 +512,7 @@ function laptop_draw()
 end
 
 function totime(n)
-    return string.format('%.2d:%.2d:%.2d',math.floor(timer/60/60),math.floor(timer/60),math.floor(timer%60*100/60))
+    return string.format('%.2d:%.2d:%.2d',math.floor(timer/60/60),math.floor((timer/60)%60),math.floor(timer%60*100/60))
 end
 
 -- version 1.a

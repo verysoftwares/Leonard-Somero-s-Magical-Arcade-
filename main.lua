@@ -17,6 +17,10 @@ function love.load()
     verysoft_font=love.graphics.newFont('wares/monofonto rg.otf',64)
     verysoft_font2=love.graphics.newFont('wares/monofonto rg.otf',24-2)
     handwrite_font=love.graphics.newFont('wares/Bubbly-Regular.otf',18)
+    -- wait what, it doesn't have numbers?
+    handwrite_font2=love.graphics.newFont('wares/Bubbly-Regular.otf',18*4)
+    info_font=love.graphics.newFont('wares/Info Story.otf')
+    info_font2=love.graphics.newFont('wares/Info Story.otf',18*4)
     --slick_load()
     images={}
     images.diskette=love.graphics.newImage('wares/diskette.png')
@@ -494,14 +498,21 @@ function laptop_update()
 end
 
 function laptop_draw()
-    love.graphics.clear(0.8,0.8,0.8,1)
+    love.graphics.clear(0.8,0.8,0.8, 1)
     love.graphics.setFont(handwrite_font)
     for i,d in ipairs(diskettes) do        
-    love.graphics.setColor(1,1,1,1)
+    love.graphics.setColor(1,1,1, 1)
     love.graphics.draw(images.diskette,sw/2-cos(d.a)*240,sh/2-sin(d.a)*240*0.6,0,math.abs(d.a-pi))
-    love.graphics.setColor(0.2,0.2,0.2,1)
+    love.graphics.setColor(0.2,0.2,0.2, 1)
     --love.graphics.print(d.genre,sw/2-cos(d.a)*240,sh/2-sin(d.a)*240*0.6)
     end
+    love.graphics.setFont(info_font2)
+    love.graphics.setColor(0.2,0.2,0.4, 1)
+    love.graphics.print(totime(timer))
+end
+
+function totime(n)
+    return string.format('%.2d:%.2d',math.floor(timer/60),math.floor(timer%60*100/60))
 end
 
 -- version 1.a

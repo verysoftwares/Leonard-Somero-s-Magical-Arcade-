@@ -36,3 +36,8 @@ Timers
     (Also, there's another timer for when the player will inspect it, again with reverse and fast forward controls. You have the timer's amount of time to make a selection in the point-and-click interface.)
     + Illustrates the passing of time
     - May be difficult to integrate into gameplay
+
+Hyperbolic time chamber
+    (A place where time runs slowly, depicted as another 3D model. You can bring stuff from the apartment here.)
+    + Magic
+    - Might be tedious to transfer stuff and have it be in two separate places

@@ -511,8 +511,9 @@ function laptop_draw()
     love.graphics.print(totime(timer))
 end
 
-function totime(n)
-    return string.format('%.2d:%.2d:%.2d',math.floor(timer/60/60),math.floor((timer/60)%60),math.floor(timer%60*100/60))
+function totime(nf)
+    -- nf: n in frames
+    return string.format('%.2d:%.2d:%.2d',math.floor(nf/60/60),math.floor((nf/60)%60),math.floor(nf%60*100/60))
 end
 
 -- version 1.a

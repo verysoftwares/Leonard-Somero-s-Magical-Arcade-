@@ -1,6 +1,6 @@
 local vertexFormat = {
     {"VertexPosition", "float", 3},
-    --{"VertexTexCoord", "float", 2},
+    {"VertexTexCoord", "float", 2},
 }
 local vertexFormat2 = {
     {'VertexColor','float',3},
@@ -16,15 +16,15 @@ canvas=love.graphics.newCanvas(sw,sh)
 
 function gpu_render()
     love.graphics.setCanvas({{canvas},stencil=true,depth=true})
-    love.graphics.clear(0.025*14,0.012*14,0.0122*14)
+    love.graphics.clear(0.0122*14,0.012*14,0.025*14)
 
     love.graphics.setShader(threed_shader)
     threed_shader:send('proj',projmat2)
     threed_shader:send('rotX',matrotX)
     --loveprint(camera3d.x,camera3d.y,camera3d.z)
     threed_shader:send('camera3d',{camera3d.x,camera3d.y,camera3d.z,0})
-    --threed_shader:send('tex2',test_tex)
-    --threed_shader:send('tex3',test_tex2)
+    threed_shader:send('tex2',test_tex)
+    threed_shader:send('tex3',test_tex)
 
     love.graphics.setColor(1,1,1)
     love.graphics.draw(mesh,0,0)
@@ -401,28 +401,28 @@ end
 --amazing cube
 triangles = {
     --south face
-    point(1,1,0), point(0,0,0), point(0,1,0),
-    point(1,0,0), point(0,0,0), point(1,1,0),
+    point(1,1,0,1,1), point(0,0,0,0,0), point(0,1,0,1,0),
+    point(1,0,0,0,1), point(0,0,0,0,0), point(1,1,0,1,1),
 
     --east face
-    point(1,0,0), point(1,1,0), point(1,1,1),
-    point(1,0,0), point(1,1,1), point(1,0,1),
+    point(1,0,0,0,0), point(1,1,0,1,0), point(1,1,1,1,1),
+    point(1,0,0,0,0), point(1,1,1,1,1), point(1,0,1,0,1),
 
     --north face
-    point(1,0,1), point(1,1,1), point(0,1,1),
-    point(1,0,1), point(0,1,1), point(0,0,1),
+    point(1,0,1,0,0), point(1,1,1,0,1), point(0,1,1,1,1),
+    point(1,0,1,0,0), point(0,1,1,1,1), point(0,0,1,1,0),
 
     --west face
-    point(0,1,1), point(0,0,1), point(0,1,0),
-    point(0,1,0), point(0,0,1), point(0,0,0),
+    point(0,1,1,1,0), point(0,0,1,0,0), point(0,1,0,1,1),
+    point(0,1,0,1,1), point(0,0,1,0,0), point(0,0,0,0,1),
 
     --top face
-    point(0,1,1), point(0,1,0), point(1,1,1),
-    point(1,1,1), point(0,1,0), point(1,1,0),
+    point(0,1,1,0,1), point(0,1,0,0,0), point(1,1,1,1,1),
+    point(1,1,1,1,1), point(0,1,0,0,0), point(1,1,0,1,0),
 
     --bottom face
-    point(0,0,1), point(1,0,1), point(0,0,0),
-    point(0,0,0), point(1,0,1), point(1,0,0),
+    point(0,0,1,1,1), point(1,0,1,1,0), point(0,0,0,0,1),
+    point(0,0,0,0,1), point(1,0,1,1,0), point(1,0,0,0,0),
 }
 
 textures={{}}
@@ -451,17 +451,17 @@ uniform Image tex3;
 vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords)
 {
     vec4 texturecolor=color;
-    if (color.r>=1.0-0.1) { 
-        texture_coords.x=texture_coords.x*2.5;
+    //if (color.r>=1.0-0.1) { 
+        texture_coords.x=texture_coords.x*2.0;
         while(texture_coords.x>1.0) {
             texture_coords.x=texture_coords.x-1.0;
         }
-        texture_coords.y=texture_coords.y*2.5;
+        texture_coords.y=texture_coords.y*2.0;
         while(texture_coords.y>1.0) {
             texture_coords.y=texture_coords.y-1.0;
         }
         texturecolor = Texel(tex2, texture_coords); 
-    }
+    //}
     if (color.b>=1.0-0.1) { 
         texture_coords.x=texture_coords.x*2.5;
         while(texture_coords.x>1.0) {

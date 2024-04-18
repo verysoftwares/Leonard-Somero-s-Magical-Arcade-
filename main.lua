@@ -2,6 +2,7 @@ require 'alias'
 require 'utility'
 require 'TIC-boilerplate'
 require 'perlin'
+require '3D'
 require 'slick-slices'
 require 'life-of-tree'
 require 'pocketbolo'
@@ -521,5 +522,5 @@ end
 --love.draw=diskettes_draw
 
 -- version 1.b
-love.update=laptop_update
-love.draw=laptop_draw
+love.update=threed
+love.draw=gpu_render

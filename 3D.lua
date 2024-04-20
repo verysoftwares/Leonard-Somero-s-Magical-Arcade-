@@ -23,7 +23,10 @@ function gpu_render()
     threed_shader:send('rotX',matrotX)
     --loveprint(camera3d.x,camera3d.y,camera3d.z)
     threed_shader:send('camera3d',{camera3d.x,camera3d.y,camera3d.z,0})
-    threed_shader:send('tex2',test_tex)
+    --local tex={test_tex,test_tex2,test_tex3,test_tex4}
+    --local ct=tex[math.floor((t*0.08)%4+1)]
+    ct=cube_tex[math.floor((t*0.08)%7+1)]
+    threed_shader:send('tex2',ct)
     threed_shader:send('tex3',test_tex)
 
     love.graphics.setColor(1,1,1)
@@ -485,6 +488,7 @@ if status then loveprint(string.format('Shader is valid: %s',status))
 else loveprint(string.format('Shader has problem: %s',message)) end
 
 function threed(dt)
+    t=t or 0
     local fwd=vec_mul(lookdir,0.25*dt*60)
     --loveprint(lookdir[1],lookdir[2],lookdir[3])
     local yawchange=0
@@ -529,6 +533,8 @@ function threed(dt)
         --to view matrix
         matview=mat_qinv(matcamera3d)
     end
+
+    t=t+1
 end
 
 threed(0) -- to initialize matrix rotations

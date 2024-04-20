@@ -2,6 +2,7 @@ require 'alias'
 require 'utility'
 require 'TIC-boilerplate'
 require 'perlin'
+require 'load'
 require '3D'
 require 'slick-slices'
 require 'life-of-tree'
@@ -13,35 +14,6 @@ require 'dropplet'
 
 cat_paws=0
 t=0
-
-function love.load()
-    verysoft_font=love.graphics.newFont('wares/monofonto rg.otf',64)
-    verysoft_font2=love.graphics.newFont('wares/monofonto rg.otf',24-2)
-    handwrite_font=love.graphics.newFont('wares/Bubbly-Regular.otf',18)
-    -- wait what, it doesn't have numbers?
-    handwrite_font2=love.graphics.newFont('wares/Bubbly-Regular.otf',18*4)
-    info_font=love.graphics.newFont('wares/Info Story.otf')
-    info_font2=love.graphics.newFont('wares/Info Story.otf',18*4)
-    --slick_load()
-    images={}
-    images.diskette=love.graphics.newImage('wares/diskette.png')
-    images.diskette2=love.graphics.newImage('wares/diskette2.png')
-    images.diskette3=love.graphics.newImage('wares/diskette3.png')
-    images.catpaw=love.graphics.newImage('wares/catpaw.png')
-    audio={}
-    audio.song1=love.audio.newSource('wares/vsa-music.ogg','stream')
-    audio.song1:setLooping(true)
-    audio.song2=love.audio.newSource('wares/vsa-music2.ogg','stream')
-    audio.song2:setLooping(true)
-    --audio.song1:play()
-    cur_audio=audio.song1
-    test_tex=love.graphics.newImage('wares/test_tex.png')
-    --setup_game('Slick Slices')
-    --setup_game('Batch-3')
-    --setup_game('Apoplex')
-    --love.draw=game_draw
-    --love.update=game_update
-end
 
 love.graphics.setDefaultFilter('nearest')
 --game_w=12*26*2; game_h=12*21*2

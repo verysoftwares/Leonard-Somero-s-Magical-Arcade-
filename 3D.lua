@@ -30,14 +30,18 @@ function gpu_render()
     --threed_shader:send('tex2',ct)
     threed_shader:send('tex2',test_tex)
     threed_shader:send('tex3',test_tex)
+    threed_shader:send('t',t*0.02)
 
     love.graphics.setColor(1,1,1)
     love.graphics.draw(mesh,0,0)
     love.graphics.setShader()
+    love.graphics.print(string.format('(%d,%d,%d)',camera3d.x,camera3d.y,camera3d.z))
 
     love.graphics.setCanvas()
     love.graphics.setColor(1,1,1)
     love.graphics.draw(canvas)
+
+    t=t+1
 end
 
 function point(x,y,z,u,v)
@@ -77,13 +81,13 @@ end
     projmat2[4][3]=1
     projmat2[4][4]=0
 
-camera3d=point(0,0,-8)
+camera3d=point(-146,-62,-445)
 table.insert(camera3d,0)
 lookdir=point(0,0,0)
 yaw=0
 rot=0
-turn=math.pi/2
-turnchange=math.pi/2
+turn=0
+turnchange=math.pi/2*3
 dy=0
 
 --arguments: input vector, matrix, output/result vector
@@ -436,20 +440,50 @@ function cube(x,y,z,w,h,d)
 
     return out
 end
-for i,v in ipairs(cube(-30,0,-180,60*7,50*4,60*9)) do
+--main layout
+for i,v in ipairs(cube(-30,0,-180,60*8,50*4,60*11)) do
     table.insert(triangles,v)
 end
-for i,v in ipairs(cube(60+60,0,-180,60*3,50*4,60*4)) do
+--shower room
+for i,v in ipairs(cube(60+60,0,-180,60*3,50*4,60*5)) do
     table.insert(triangles,v)
 end
-for i,v in ipairs(cube(60,0,60-60,60,50*4,60)) do
+--fridge
+for i,v in ipairs(cube(60,0,60,60,50*4,60)) do
     table.insert(triangles,v)
 end
-for i,v in ipairs(cube(60,50*2.5,60-60-120,60,50*1.5,60*2)) do
+--kitchen table
+for i,v in ipairs(cube(60,50*2.5,60-60-120,60,50*1.5,60*3)) do
     table.insert(triangles,v)
 end
+--faucet
 for i,v in ipairs(cube(-30,50*2.5,60-60-120-60,60*2+30,50*1.5,60)) do
     table.insert(triangles,v)
+end
+--closets
+for j=0,3 do
+for i,v in ipairs(cube(-30+60*8-40,0,60-60-120+60+j*40,40,50*4,40)) do
+    table.insert(triangles,v)
+end
+end
+--bed
+for i,v in ipairs(cube(60,50*3,60*8-60,60*3.5,50,60)) do
+    table.insert(triangles,v)
+end
+--desktop
+for i,v in ipairs(cube(-30+60*8-60,50*2.5,60*8-60*2.5,60,50*1.5,60*2.5)) do
+    table.insert(triangles,v)
+end
+--shelf
+for j=0,1 do
+for i,v in ipairs(cube(60+60+30+15+60*j,50,-180+60*5,4,50*3,30)) do
+    table.insert(triangles,v)
+end
+end
+for j=0,5-1 do
+for i,v in ipairs(cube(60+60+30+15+4,50+50*3/5*j,-180+60*5,60-4,4,30)) do
+    table.insert(triangles,v)
+end
 end
 
 textures={{}}
@@ -475,6 +509,7 @@ vec4 position(mat4 transform_projection, vec4 vertex_position)
 #ifdef PIXEL
 uniform Image tex2;
 uniform Image tex3;
+uniform float t;
 vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords)
 {
     vec4 texturecolor=color;
@@ -483,7 +518,7 @@ vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords)
         while(texture_coords.x>1.0) {
             texture_coords.x=texture_coords.x-1.0;
         }
-        texture_coords.y=texture_coords.y*2.0;
+        texture_coords.y=texture_coords.y*2.0+t*0.2;
         while(texture_coords.y>1.0) {
             texture_coords.y=texture_coords.y-1.0;
         }

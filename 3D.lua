@@ -25,8 +25,10 @@ function gpu_render()
     threed_shader:send('camera3d',{camera3d.x,camera3d.y,camera3d.z,0})
     --local tex={test_tex,test_tex2,test_tex3,test_tex4}
     --local ct=tex[math.floor((t*0.08)%4+1)]
-    ct=cube_tex[math.floor((t*0.08)%7+1)]
-    threed_shader:send('tex2',ct)
+    
+    --ct=cube_tex[math.floor((t*0.08)%7+1)]
+    --threed_shader:send('tex2',ct)
+    threed_shader:send('tex2',test_tex)
     threed_shader:send('tex3',test_tex)
 
     love.graphics.setColor(1,1,1)
@@ -401,40 +403,52 @@ function lightmap(tr)
     return {0.6-tri_viewed.c*0.4,0.7-tri_viewed.c*0.75,0.7-tri_viewed.c*0.75,1}
 end
 
---amazing cube
 triangles = {
 }
 
 function cube(x,y,z,w,h,d)
+    --amazing cube
     local out={
     --south face
     point(x+w,y+h,z,1,1), point(x,y,z,0,0), point(x,y+h,z,1,0),
     point(x+w,y,z,0,1), point(x,y,z,0,0), point(x+w,y+h,z,1,1),
 
     --east face
-    point(1,0,0,0,0), point(1,1,0,1,0), point(1,1,1,1,1),
-    point(1,0,0,0,0), point(1,1,1,1,1), point(1,0,1,0,1),
+    point(x+w,y,z,0,0), point(x+w,y+h,z,1,0), point(x+w,y+h,z+d,1,1),
+    point(x+w,y,z,0,0), point(x+w,y+h,z+d,1,1), point(x+w,y,z+d,0,1),
 
     --north face
-    point(1,0,1,0,1-1), point(1,1,1,1,1-1), point(0,1,1,1,1-0),
-    point(1,0,1,0,1-1), point(0,1,1,1,1-0), point(0,0,1,0,1-0),
+    point(x+w,y,z+d,0,0), point(x+w,y+h,z+d,1,0), point(x,y+h,z+d,1,1),
+    point(x+w,y,z+d,0,0), point(x,y+h,z+d,1,1), point(x,y,z+d,0,1),
 
     --west face
-    point(0,1,1,1,0), point(0,0,1,0,0), point(0,1,0,1,1),
-    point(0,1,0,1,1), point(0,0,1,0,0), point(0,0,0,0,1),
+    point(x,y+h,z+d,1,0), point(x,y,z+d,0,0), point(x,y+h,z,1,1),
+    point(x,y+h,z,1,1), point(x,y,z+d,0,0), point(x,y,z,0,1),
 
     --top face
-    point(0,1,1,0,1), point(0,1,0,0,0), point(1,1,1,1,1),
-    point(1,1,1,1,1), point(0,1,0,0,0), point(1,1,0,1,0),
+    point(x,y+h,z+d,0,1), point(x,y+h,z,0,0), point(x+w,y+h,z+d,1,1),
+    point(x+w,y+h,z+d,1,1), point(x,y+h,z,0,0), point(x+w,y+h,z,1,0),
 
     --bottom face
-    point(0,0,1,1,1), point(1,0,1,1,0), point(0,0,0,0,1),
-    point(0,0,0,0,1), point(1,0,1,1,0), point(1,0,0,0,0),
+    point(x,y,z+d,1,1), point(x+w,y,z+d,1,0), point(x,y,z,0,1),
+    point(x,y,z,0,1), point(x+w,y,z+d,1,0), point(x+w,y,z,0,0),
     }
 
     return out
 end
-for i,v in ipairs(cube(0,0,0,1,1,1)) do
+for i,v in ipairs(cube(-30,0,-180,60*7,50*4,60*9)) do
+    table.insert(triangles,v)
+end
+for i,v in ipairs(cube(60+60,0,-180,60*3,50*4,60*4)) do
+    table.insert(triangles,v)
+end
+for i,v in ipairs(cube(60,0,60-60,60,50*4,60)) do
+    table.insert(triangles,v)
+end
+for i,v in ipairs(cube(60,50*2.5,60-60-120,60,50*1.5,60*2)) do
+    table.insert(triangles,v)
+end
+for i,v in ipairs(cube(-30,50*2.5,60-60-120-60,60*2+30,50*1.5,60)) do
     table.insert(triangles,v)
 end
 
@@ -499,22 +513,22 @@ else loveprint(string.format('Shader has problem: %s',message)) end
 
 function threed(dt)
     t=t or 0
-    local fwd=vec_mul(lookdir,0.25*dt*60)
+    local fwd=vec_mul(lookdir,0.25*dt*60*4)
     --loveprint(lookdir[1],lookdir[2],lookdir[3])
     local yawchange=0
     local turnchange=0
-    if press('up')   then camera3d=vec_add(camera3d,point(-sin(turn)*0.25*dt*60,0,-cos(turn)*0.25*dt*60))
+    if press('up')   then camera3d=vec_add(camera3d,point(-sin(turn)*0.25*dt*60*4,0,-cos(turn)*0.25*dt*60*4))
         --if mesh_coll() then camera3d=vec_add(camera3d,vec_mul(fwd,0.9)) end
-    elseif press('down') then camera3d=vec_sub(camera3d,point(-sin(turn)*0.25*dt*60,0,-cos(turn)*0.25*dt*60))
+    elseif press('down') then camera3d=vec_sub(camera3d,point(-sin(turn)*0.25*dt*60*4,0,-cos(turn)*0.25*dt*60*4))
         --if mesh_coll() then camera3d=vec_sub(camera3d,vec_mul(fwd,0.9)) end
     end
     --if press('a') then yaw=yaw+0.25; yawchange=0.25 end
     --if press('d') then yaw=yaw-0.25; yawchange=-0.25 end
     if press('left')  then turn=turn-0.08*dt*60; turnchange=-0.08*dt*60 
     elseif press('right') then turn=turn+0.08*dt*60; turnchange=0.08*dt*60 end
-    if press('w') then camera3d=vec_add(camera3d,point(0,0.2*dt*60,0)) 
+    if press('w') then camera3d=vec_add(camera3d,point(0,0.2*dt*60*4,0)) 
         --if mesh_coll() then camera3d=vec_sub(camera3d,point(0,0.2*dt*60,0)) end
-    elseif press('q') then camera3d=vec_sub(camera3d,point(0,0.2*dt*60,0)) 
+    elseif press('q') then camera3d=vec_sub(camera3d,point(0,0.2*dt*60*4,0)) 
         --if mesh_coll() then camera3d=vec_add(camera3d,point(0,0.2*dt*60,0)) end
     end
 

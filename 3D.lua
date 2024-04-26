@@ -403,17 +403,21 @@ end
 
 --amazing cube
 triangles = {
+}
+
+function cube(x,y,z,w,h,d)
+    local out={
     --south face
-    point(1,1,0,1,1), point(0,0,0,0,0), point(0,1,0,1,0),
-    point(1,0,0,0,1), point(0,0,0,0,0), point(1,1,0,1,1),
+    point(x+w,y+h,z,1,1), point(x,y,z,0,0), point(x,y+h,z,1,0),
+    point(x+w,y,z,0,1), point(x,y,z,0,0), point(x+w,y+h,z,1,1),
 
     --east face
     point(1,0,0,0,0), point(1,1,0,1,0), point(1,1,1,1,1),
     point(1,0,0,0,0), point(1,1,1,1,1), point(1,0,1,0,1),
 
     --north face
-    point(1,0,1,0,0), point(1,1,1,0,1), point(0,1,1,1,1),
-    point(1,0,1,0,0), point(0,1,1,1,1), point(0,0,1,1,0),
+    point(1,0,1,0,1-1), point(1,1,1,1,1-1), point(0,1,1,1,1-0),
+    point(1,0,1,0,1-1), point(0,1,1,1,1-0), point(0,0,1,0,1-0),
 
     --west face
     point(0,1,1,1,0), point(0,0,1,0,0), point(0,1,0,1,1),
@@ -426,7 +430,13 @@ triangles = {
     --bottom face
     point(0,0,1,1,1), point(1,0,1,1,0), point(0,0,0,0,1),
     point(0,0,0,0,1), point(1,0,1,1,0), point(1,0,0,0,0),
-}
+    }
+
+    return out
+end
+for i,v in ipairs(cube(0,0,0,1,1,1)) do
+    table.insert(triangles,v)
+end
 
 textures={{}}
 

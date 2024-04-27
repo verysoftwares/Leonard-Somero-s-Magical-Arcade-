@@ -86,7 +86,7 @@ table.insert(camera3d,0)
 lookdir=point(0,0,0)
 yaw=0
 rot=0
-turn=0
+turn=math.pi/2*3
 turnchange=math.pi/2*3
 dy=0
 
@@ -552,6 +552,7 @@ function threed(dt)
     --loveprint(lookdir[1],lookdir[2],lookdir[3])
     local yawchange=0
     local turnchange=0
+    if t==0 then turn=math.pi; turnchange=math.pi end
     if press('up')   then camera3d=vec_add(camera3d,point(-sin(turn)*0.25*dt*60*4,0,-cos(turn)*0.25*dt*60*4))
         --if mesh_coll() then camera3d=vec_add(camera3d,vec_mul(fwd,0.9)) end
     elseif press('down') then camera3d=vec_sub(camera3d,point(-sin(turn)*0.25*dt*60*4,0,-cos(turn)*0.25*dt*60*4))

@@ -35,7 +35,7 @@ function gpu_render()
     love.graphics.setColor(1,1,1)
     love.graphics.draw(mesh,0,0)
     love.graphics.setShader()
-    love.graphics.print(string.format('(%d,%d,%d)',camera3d.x,camera3d.y,camera3d.z))
+    love.graphics.print(string.format('(%d,%d,%d,%s)',camera3d.x,camera3d.y,camera3d.z,totime(t)))
 
     love.graphics.setCanvas()
     love.graphics.setColor(1,1,1)
@@ -592,8 +592,6 @@ function threed(dt)
         --to view matrix
         matview=mat_qinv(matcamera3d)
     end
-
-    t=t+1
 end
 
 threed(0) -- to initialize matrix rotations

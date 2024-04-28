@@ -441,11 +441,11 @@ function cube(x,y,z,w,h,d)
     return out
 end
 --main layout
-for i,v in ipairs(cube(-30,0,-180,60*8,50*4,60*11)) do
+for i,v in ipairs(cube(-30,-50*0.5,-180,60*8,50*4.5,60*11)) do
     table.insert(triangles,v)
 end
 --shower room
-for i,v in ipairs(cube(60+60,0,-180,60*3,50*4,60*5)) do
+for i,v in ipairs(cube(60+60,-50*0.5,-180,60*3,50*4.5,60*5)) do
     table.insert(triangles,v)
 end
 --fridge

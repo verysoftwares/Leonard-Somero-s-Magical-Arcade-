@@ -441,50 +441,54 @@ function cube(x,y,z,w,h,d)
     return out
 end
 --main layout
-for i,v in ipairs(cube(-30,-50*0.5,-180,60*8,50*4.5,60*11)) do
-    table.insert(triangles,v)
-end
+    for i,v in ipairs(cube(-30,-50*0.5,-180,60*8,50*4.5,60*11)) do
+        table.insert(triangles,v)
+    end
 --shower room
-for i,v in ipairs(cube(60+60,-50*0.5,-180,60*3,50*4.5,60*5)) do
-    table.insert(triangles,v)
-end
+    for i,v in ipairs(cube(60+60,-50*0.5,-180,60*3,50*4.5,60*5)) do
+        table.insert(triangles,v)
+    end
 --fridge
-for i,v in ipairs(cube(60,0,60,60,50*4,60)) do
-    table.insert(triangles,v)
-end
+    for i,v in ipairs(cube(60,0,60,60,50*4,60)) do
+        table.insert(triangles,v)
+    end
 --kitchen table
-for i,v in ipairs(cube(60,50*2.5,60-60-120,60,50*1.5,60*3)) do
-    table.insert(triangles,v)
-end
+    for i,v in ipairs(cube(60,50*2.5,60-60-120,60,50*1.5,60*3)) do
+        table.insert(triangles,v)
+    end
 --faucet
-for i,v in ipairs(cube(-30,50*2.5,60-60-120-60,60*2+30,50*1.5,60)) do
+    for i,v in ipairs(cube(-30,50*2.5,60-60-120-60,60*2+30,50*1.5,60)) do
     table.insert(triangles,v)
-end
+    end
 --closets
-for j=0,3 do
-for i,v in ipairs(cube(-30+60*8-40,0,60-60-120+60+j*40,40,50*4,40)) do
-    table.insert(triangles,v)
-end
-end
+    for j=0,3 do
+    for i,v in ipairs(cube(-30+60*8-40,0,60-60-120+60+j*40,40,50*4,40)) do
+        table.insert(triangles,v)
+    end
+    end
 --bed
-for i,v in ipairs(cube(60,50*3,60*8-60,60*3.5,50,60)) do
-    table.insert(triangles,v)
-end
+    for i,v in ipairs(cube(60,50*3,60*8-60,60*3.5,50*0.5,60)) do
+        table.insert(triangles,v)
+    end
+    for i,v in ipairs(cube(60,50*3+50*0.5,60*8-60,6,50*0.5,6)) do table.insert(triangles,v) end
+    for i,v in ipairs(cube(60+60*3.5-6,50*3+50*0.5,60*8-60,6,50*0.5,6)) do table.insert(triangles,v) end
+    for i,v in ipairs(cube(60,50*3+50*0.5,60*8-6,6,50*0.5,6)) do table.insert(triangles,v) end
+    for i,v in ipairs(cube(60+60*3.5-6,50*3+50*0.5,60*8-6,6,50*0.5,6)) do table.insert(triangles,v) end
 --desktop
-for i,v in ipairs(cube(-30+60*8-60,50*2.5,60*8-60*2.5,60,50*1.5,60*2.5)) do
-    table.insert(triangles,v)
-end
+    for i,v in ipairs(cube(-30+60*8-60,50*2.5,60*8-60*2.5,60,50*1.5,60*2.5)) do
+        table.insert(triangles,v)
+    end
 --shelf
-for j=0,1 do
-for i,v in ipairs(cube(60+60+30+15+60*j,50,-180+60*5,4,50*3,30)) do
-    table.insert(triangles,v)
-end
-end
-for j=0,5-1 do
-for i,v in ipairs(cube(60+60+30+15+4,50+50*3/5*j,-180+60*5,60-4,4,30)) do
-    table.insert(triangles,v)
-end
-end
+    for j=0,1 do
+    for i,v in ipairs(cube(60+60+30+15+60*j,50,-180+60*5,4,50*3,30)) do
+        table.insert(triangles,v)
+    end
+    end
+    for j=0,5-1 do
+    for i,v in ipairs(cube(60+60+30+15+4,50+50*3/5*j,-180+60*5,60-4,4,30)) do
+        table.insert(triangles,v)
+    end
+    end
 
 textures={{}}
 

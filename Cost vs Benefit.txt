@@ -34,7 +34,7 @@ Visual novel choices
 Timers
     (There's a timer counting down to Maitreya's next appearance. The player has the option to fast forward and reverse.)
     (Also, there's another timer for when the main character will inspect a selected point-and-click interface element, again with reverse and fast forward controls. The player has the timer's amount of time to make a selection in the point-and-click interface.)
-    (Time until screen update)
+    (Others (situational): Time until screen update, time until 3D to 2D)
     + Illustrates the passing of time
     - May be difficult to integrate into gameplay
 

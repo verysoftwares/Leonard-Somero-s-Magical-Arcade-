@@ -41,7 +41,9 @@ function gpu_render()
     love.graphics.setColor(1,1,1)
     love.graphics.draw(canvas)
 
+    if (press('up') or press('down') or press('left') or press('right') or press('q') or press('w')) then
     t=t+1
+    end
 end
 
 function point(x,y,z,u,v)

@@ -71,10 +71,10 @@ end
 --projection matrix
     projmat2 = mat4x4()
     --rendering limits
-        near=0.1
-        fov=90
-    aspect=sw/sh
-    fovrad=1/tan((fov * (pi/180)) * 0.5)
+        local near=0.1
+        local fov=90
+    local aspect=sw/sh
+    local fovrad=1/tan((fov * (pi/180)) * 0.5)
     
     projmat2[1][1]=fovrad/aspect
     projmat2[2][2]=fovrad

@@ -28,7 +28,7 @@ function gpu_render()
     
     --ct=cube_tex[math.floor((t*0.08)%7+1)]
     --threed_shader:send('tex2',ct)
-    threed_shader:send('tex2',test_tex)
+    --threed_shader:send('tex2',test_tex)
     threed_shader:send('tex3',test_tex)
     threed_shader:send('t',t*0.02)
 
@@ -499,7 +499,8 @@ local c
     add(c)
     end
 
-textures={{}}
+textures={}
+for i=1,#triangles do table.insert(textures,{0,0,1}) end
 
 mesh = love.graphics.newMesh(vertexFormat, triangles, "triangles", 'static')
 tex = love.graphics.newMesh(vertexFormat2, textures, 'triangles', 'static')
@@ -520,29 +521,21 @@ vec4 position(mat4 transform_projection, vec4 vertex_position)
 #endif
 
 #ifdef PIXEL
-uniform Image tex2;
+//uniform Image tex2;
 uniform Image tex3;
 uniform float t;
 vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords)
 {
     vec4 texturecolor=color;
-    //if (color.r>=1.0-0.1) { 
+    if (color.b<0.1) { 
+        texturecolor=vec4(0.8,0.8,0.4,1);
+    }
+    if (color.b>=1.0-0.1) { 
         texture_coords.x=texture_coords.x*2.0;
         while(texture_coords.x>1.0) {
             texture_coords.x=texture_coords.x-1.0;
         }
         texture_coords.y=texture_coords.y*2.0+t*0.2;
-        while(texture_coords.y>1.0) {
-            texture_coords.y=texture_coords.y-1.0;
-        }
-        texturecolor = Texel(tex2, texture_coords); 
-    //}
-    if (color.b>=1.0-0.1) { 
-        texture_coords.x=texture_coords.x*2.5;
-        while(texture_coords.x>1.0) {
-            texture_coords.x=texture_coords.x-1.0;
-        }
-        texture_coords.y=texture_coords.y*2.5;
         while(texture_coords.y>1.0) {
             texture_coords.y=texture_coords.y-1.0;
         }
@@ -605,6 +598,58 @@ function threed(dt)
         local matcamera3d=mat_pointat(camera3d,target,up)
         --to view matrix
         matview=mat_qinv(matcamera3d)
+    end
+
+    -- interaction with 3D objects
+    mouse_point()
+end
+
+function mouse_point()
+    for i=1,#textures do textures[i]={0,0,1} end
+    tex = love.graphics.newMesh(vertexFormat2, textures, 'triangles', 'static')
+    mesh:attachAttribute("VertexColor", tex)
+
+    local mx,my=love.mouse.getPosition()
+
+    local vcl={x=sin(turn),y=0,z=cos(turn)}
+    local view=170+20+20
+    local vcc={x=-camera3d.x-(mx/sw*view-view/2)*(sin(turn-math.pi/2)),y=-camera3d.y+(my/sh*view-view/2),z=-camera3d.z-(mx/sw*view-view/2)*(cos(turn-math.pi/2))}
+    --loveprint(vcc.x,vcc.y,vcc.z)
+    for i=0,120 do
+        vcc.x=vcc.x+vcl.x
+        vcc.y=vcc.y+vcl.y
+        vcc.z=vcc.z+vcl.z
+        for i=1,#triangles,6*6 do
+            local minx,miny,minz={},{},{}
+            local maxx,maxy,maxz={},{},{}
+            for j=0,6*6-1 do
+                table.insert(minx,triangles[i+j].x)
+                table.insert(miny,triangles[i+j].y)
+                table.insert(minz,triangles[i+j].z)
+                table.insert(maxx,triangles[i+j].x)
+                table.insert(maxy,triangles[i+j].y)
+                table.insert(maxz,triangles[i+j].z)
+            end
+            local minx2=math.min(unpack(minx))
+            local miny2=math.min(unpack(miny))
+            local minz2=math.min(unpack(minz))
+            local maxx2=math.max(unpack(maxx))
+            local maxy2=math.max(unpack(maxy))
+            local maxz2=math.max(unpack(maxz))
+            --loveprint(vcc.x,minx2,maxx2)
+            if i~=1 and i~=1+6*6 and
+               vcc.x>minx2 and vcc.x<maxx2 and
+               vcc.y>miny2 and vcc.y<maxy2 and
+               vcc.z>minz2 and vcc.z<maxz2 then
+                --loveprint(string.format('%d,%d,%d,%d',vcc.x,vcc.y,vcc.z,(i-1)/(6*6)))
+                for k=0,6*6-1 do
+                    textures[i+k]={0,0,0}
+                end
+                tex = love.graphics.newMesh(vertexFormat2, textures, 'triangles', 'static')
+                mesh:attachAttribute("VertexColor", tex)
+                return
+            end
+        end
     end
 end
 

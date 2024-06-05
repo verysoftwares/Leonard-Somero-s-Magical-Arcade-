@@ -42,3 +42,7 @@ Hyperbolic time chamber
     (A place where time runs slowly, depicted as another 3D model. You can bring stuff from the apartment here.)
     + Magic
     - Might be tedious to transfer stuff and have it be in two separate places
+
+Registered vs. Unregistered copies
+    + A good use for cat paws
+    - Kind of an artificial limitation

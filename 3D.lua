@@ -37,6 +37,10 @@ function gpu_render()
     love.graphics.setShader()
     love.graphics.print(string.format('(%d,%d,%d,%s)',camera3d.x,camera3d.y,camera3d.z,totime(t)))
 
+    if images then -- love.load has been called
+        diag_draw()
+    end
+
     love.graphics.setCanvas()
     love.graphics.setColor(1,1,1)
     love.graphics.draw(canvas)
@@ -602,6 +606,10 @@ function threed(dt)
 
     -- interaction with 3D objects
     mouse_point()
+
+    if images then -- love.load has been called
+    diag_update()
+    end
 end
 
 function mouse_point()

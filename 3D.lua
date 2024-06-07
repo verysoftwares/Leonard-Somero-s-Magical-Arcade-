@@ -559,15 +559,15 @@ function threed(dt)
     local yawchange=0
     local turnchange=0
     if t==0 then turn=math.pi; turnchange=math.pi end
-    if press('up')   then camera3d=vec_add(camera3d,point(-sin(turn)*0.25*dt*60*4,0,-cos(turn)*0.25*dt*60*4))
+    if press('up') or press('w')  then camera3d=vec_add(camera3d,point(-sin(turn)*0.25*dt*60*4,0,-cos(turn)*0.25*dt*60*4))
         --if mesh_coll() then camera3d=vec_add(camera3d,vec_mul(fwd,0.9)) end
-    elseif press('down') then camera3d=vec_sub(camera3d,point(-sin(turn)*0.25*dt*60*4,0,-cos(turn)*0.25*dt*60*4))
+    elseif press('down') or press('s') then camera3d=vec_sub(camera3d,point(-sin(turn)*0.25*dt*60*4,0,-cos(turn)*0.25*dt*60*4))
         --if mesh_coll() then camera3d=vec_sub(camera3d,vec_mul(fwd,0.9)) end
     end
     --if press('a') then yaw=yaw+0.25; yawchange=0.25 end
     --if press('d') then yaw=yaw-0.25; yawchange=-0.25 end
-    if press('left')  then turn=turn-0.08*dt*60; turnchange=-0.08*dt*60 
-    elseif press('right') then turn=turn+0.08*dt*60; turnchange=0.08*dt*60 end
+    if press('left') or press('a') then turn=turn-0.08*dt*60; turnchange=-0.08*dt*60 
+    elseif press('right') or press('d') then turn=turn+0.08*dt*60; turnchange=0.08*dt*60 end
     if press('w') then camera3d=vec_add(camera3d,point(0,0.2*dt*60*4,0)) 
         --if mesh_coll() then camera3d=vec_sub(camera3d,point(0,0.2*dt*60,0)) end
     elseif press('q') then camera3d=vec_sub(camera3d,point(0,0.2*dt*60*4,0)) 

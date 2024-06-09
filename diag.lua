@@ -82,7 +82,7 @@ cur_section_i=1
 --if cur_section_i>1 then diagbox.w=1280-2*120 end
 
 function diag_update()
-    if diagbox.w<=sw-80*2-1 then return end
+    if diagbox.w<=24+128+24+8 then return end
     if t2 then
         t2=t2-1
         if t2==0 then t2=nil end
@@ -144,7 +144,7 @@ function diag_draw()
     if tgth<24+128+24 then tgth=24+128+24 end
     diagbox.h=diagbox.h+(tgth-diagbox.h)*0.1
     diagbox.y=diagbox.y+(sh-32-diagbox.h-diagbox.y)*0.2
-    if diagbox.w>=sw-80*2-1 then
+    if diagbox.w>24+128+24+8 then
     local th=0
     for i,row in ipairs(diag_split) do
         th=th+fonts.main2:getHeight(row[1])

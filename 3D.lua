@@ -45,7 +45,7 @@ function gpu_render()
     love.graphics.setColor(1,1,1)
     love.graphics.draw(canvas)
 
-    if (press('up') or press('down') or press('left') or press('right') or press('q') or press('w')) then
+    if (press('up') or press('down') or press('left') or press('right') or press('q') or press('w') or press('e') or press('a') or press('s') or press('d')) then
     t=t+1
     end
 end
@@ -618,15 +618,17 @@ function mouse_point()
     mesh:attachAttribute("VertexColor", tex)
 
     local mx,my=love.mouse.getPosition()
+    lastclick=click
+    click=love.mouse.isDown(1)
 
     local vcl={x=sin(turn),y=0,z=cos(turn)}
     local view=170+20+20
     local vcc={x=-camera3d.x-(mx/sw*view-view/2)*(sin(turn-math.pi/2)),y=-camera3d.y+(my/sh*view-view/2),z=-camera3d.z-(mx/sw*view-view/2)*(cos(turn-math.pi/2))}
     --loveprint(vcc.x,vcc.y,vcc.z)
-    for i=0,120 do
-        vcc.x=vcc.x+vcl.x
-        vcc.y=vcc.y+vcl.y
-        vcc.z=vcc.z+vcl.z
+    for i=0,30 do
+        vcc.x=vcc.x+vcl.x*4
+        vcc.y=vcc.y+vcl.y*4
+        vcc.z=vcc.z+vcl.z*4
         for i=1,#triangles,6*6 do
             local minx,miny,minz={},{},{}
             local maxx,maxy,maxz={},{},{}
@@ -653,11 +655,19 @@ function mouse_point()
                 for k=0,6*6-1 do
                     textures[i+k]={0,0,0}
                 end
+                get_click((i-1)/(6*6))
                 tex = love.graphics.newMesh(vertexFormat2, textures, 'triangles', 'static')
                 mesh:attachAttribute("VertexColor", tex)
                 return
             end
         end
+    end
+end
+
+function get_click(cb)
+    if click and not lastclick then
+    loveprint(cb)
+    if cb==17 then sections={create_section('It\'s a Windows 2024 computer with 999 GB of RAM.','fun but challenging',60*2,nil,nil)}; cur_section=sections[1] end
     end
 end
 

@@ -41,7 +41,7 @@ function voiceover(wav)
     if not audio[wav] then
         audio[wav]=love.audio.newSource(fmt('wares/%s.ogg',wav),'stream')
         audio[wav]:play()
-        local dur = audio[wav]:getDuration()
+        local dur = 3.0--audio[wav]:getDuration()
         tick_dur=dur/#cur_diag
         au_lastcheck=0
         elapsed=0
@@ -64,22 +64,22 @@ function create_section(dg,vo,dur,init,const)
     }
 end
 
-sections={
+--[[sections={
     create_section('It\'s a table. It\'s a table. It\'s a table. It\'s a table. It\'s a table. It\'s a table. It\'s a table.',
                    'fun but challenging',
-                   60*3,
+                   60,
                    nil,
                    nil)
-}
+}]]
 
 t=0--2490+30+260+90+30+80+60*9+20+60*12+380+50+60*15+60*9+40+60*15+20+60*11+30+5*60+50+140--15540--2490+30+260+90+30+80+60*9+20+60*12+380+50+60*15+60*9+40+60*15+20+60*11+30+5*60+50+140--2490+30+260+90+30+80+60*9+20+60*12+380+50+60*15+60*9+40+60*15+20+60*11+30+5*60+50+60*14+40+140+60*5+60*19+60+60*11--2490+30+260+90+30+80+60*9+20+60*12+380+50+60*15+60*9+40+60*15+20+60*11+30+5*60+50+60*14+40+140+60*5+60*19+60+60*11+60*4+60*9+30+60*3+60*3+30+60*2-60--2490+30+260+90+30+80+60*9+20+60*12+380+50+60*15+60*9+40+60*15+20+60*11+30+5*60+50+140--2490+30+260+90+30+80+60*9+20+60*12+380+50+60*15+60*9+40+60*15+20+60*11+30+5*60+50+60*14+40+140+60*5+60*19+60+60*11+60*4--2490+30+260+90+30+80+60*9+20+60*12+380+50+60*15+60*9+40+60*15+20+60*11+30+5*60+50+140--2490+30+260+90+30+80+60*9+20+60*12+380+50+60*15+60*9+40+60*15+20+60*11+30+5*60+50+60*14+40+140+60*5--2490+30+260+90+30+80+60*9+20+60*12+380+50+60*15+60*9+40+60*15+20+60*11+30+5*60+50+140--2490+30+260+90+30+80+60*9+20+60*12+380+50--2490+30--+260+90+30+80+60*9+20+60*12+380+50--2490+30+260+90+30+80+60*9+20+60*12+380+50+60*15+60*9+40+60*15+20--2490+30+260+90+30+80+60*9+20+60*12+380+50+60*15+60*9+40--2490+30
 sc_t=t+1
 t2=nil
 at=0
 cur_section_i=1
-cur_section=sections[cur_section_i]
+--cur_section=sections[cur_section_i]
 
-if cur_section_i>1 then diagbox.w=1280-2*120 end
+--if cur_section_i>1 then diagbox.w=1280-2*120 end
 
 function diag_update()
     if t2 then
@@ -88,8 +88,8 @@ function diag_update()
         at=at+1
         return
     end
-
     if cur_section then
+    --loveprint(cur_section.dur)
     if cur_section.dg~=nil then dialogueprint(cur_section.dg) end
     if cur_section.vo~=nil then voiceover(cur_section.vo) end
     if cur_section.dur==cur_section.maxdur and cur_section.init then cur_section.init() end
@@ -111,6 +111,7 @@ end
 --diag_canvas=lg.newCanvas(sw,sh)
 function diag_draw()
     --lg.setDefaultFilter('nearest')
+    if not cur_section then return end
     lg.setCanvas(canvas)
     --lg.clear(0,0,0,0)
 

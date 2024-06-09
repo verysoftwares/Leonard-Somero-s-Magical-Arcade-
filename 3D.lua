@@ -667,7 +667,7 @@ end
 function get_click(cb)
     if click and not lastclick then
     loveprint(cb)
-    if cb==17 then sections={create_section('It\'s a Windows 2024 computer with 999 GB of RAM.','fun but challenging',60*2,nil,nil)}; cur_section=sections[1] end
+    if cb==17 then sections={create_section('It\'s a Windows 2024 computer with 999 GB of RAM.','fun but challenging',60*2,nil,nil)}; cur_section=sections[1]; cur_section_i=1 end
     end
 end
 

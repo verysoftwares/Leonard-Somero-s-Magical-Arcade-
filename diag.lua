@@ -97,6 +97,9 @@ function diag_update()
     if cur_section.dur>0 then 
         cur_section.dur=cur_section.dur-1
         if cur_section.dur==0 then 
+            cur_diag=''
+            audio[cur_section.vo]:stop()
+            audio[cur_section.vo]=nil
             cur_section_i=cur_section_i+1
             cur_section=sections[cur_section_i]
             sc_t=t+1

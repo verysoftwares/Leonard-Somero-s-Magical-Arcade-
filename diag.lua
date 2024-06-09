@@ -1,4 +1,4 @@
-diagbox={x=80,y=sh-(24+128+24+32),w=sw-2*80,h=24+128+24}
+diagbox={x=80,y=sh-(24+128+24+32),w=24+128+24,h=24+128+24}
 
 cur_diag=''
 function dialogueprint(diag)
@@ -82,6 +82,7 @@ cur_section_i=1
 --if cur_section_i>1 then diagbox.w=1280-2*120 end
 
 function diag_update()
+    if diagbox.w<=sw-80*2-1 then return end
     if t2 then
         t2=t2-1
         if t2==0 then t2=nil end
@@ -98,8 +99,12 @@ function diag_update()
         cur_section.dur=cur_section.dur-1
         if cur_section.dur==0 then 
             cur_diag=''
+            diag_split=nil
+            diagbox.w=24+128+24
+            if cur_section.vo then
             audio[cur_section.vo]:stop()
             audio[cur_section.vo]=nil
+            end
             cur_section_i=cur_section_i+1
             cur_section=sections[cur_section_i]
             sc_t=t+1
@@ -133,10 +138,13 @@ function diag_draw()
     lg.setFont(fonts.main2)
     fg(0.8,0.8,0.8)
     diag_split=diag_split or {}
+    local tgtw=sw-80*2
+    diagbox.w=diagbox.w+(tgtw-diagbox.w)*0.1
     local tgth=24+#diag_split*36+24
     if tgth<24+128+24 then tgth=24+128+24 end
     diagbox.h=diagbox.h+(tgth-diagbox.h)*0.1
     diagbox.y=diagbox.y+(sh-32-diagbox.h-diagbox.y)*0.2
+    if diagbox.w>=sw-80*2-1 then
     local th=0
     for i,row in ipairs(diag_split) do
         th=th+fonts.main2:getHeight(row[1])
@@ -151,6 +159,7 @@ function diag_draw()
             if tick then row.c=row.c+1 end
             break
         else him=images.he_thincc end
+    end
     end
     him=him or images.he_thincc
     fg(1,1,1)

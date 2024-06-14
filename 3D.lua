@@ -446,61 +446,67 @@ function cube(x,y,z,w,h,d)
 
     return out
 end
-function add(c)
-    for i,v in ipairs(c) do table.insert(triangles,v) end
+function add(c,tag)
+    for i,v in ipairs(c) do table.insert(triangles,v); if i==1 then v.tag=tag end end
 end
 
 local c
 --main layout
     c=cube(-30,-50*0.5,-180,60*8,50*4.5,60*11)
-    add(c)
+    add(c,'apartment')
 --shower room    
     c=cube(60+60,-50*0.5,-180,60*3,50*4.5,60*5)
-    add(c)
+    add(c,'showerroom')
 --fridge
     c=cube(60,0,60,60,50*4,60)
-    add(c)
+    add(c,'fridge')
 --kitchen table
     c=cube(60,50*2.5,60-60-120,60,50*1.5,60*3)
-    add(c)
+    add(c,'kitchentable')
 --faucet
     c=cube(-30,50*2.5,60-60-120-60,60*2+30,50*1.5,60)
-    add(c)
+    add(c,'kitchentable')
+    c=cube(-30+60,50*2.5-30,60-60-120-60+20,6,6,30)
+    add(c,'faucet')
+    c=cube(-30+60,50*2.5-30+6,60-60-120-60+20,6,30-6,6)
+    add(c,'faucet')
+    c=cube(-30+60,50*2.5-30+6,60-60-120-60+20+30-6,6,6,6)
+    add(c,'faucet')
 --closets
     for j=0,3 do
-    c=cube(-30+60*8-40,0,60-60-120+60+j*40,40,50*4,40)
-    add(c)
+    c=cube(-30+60*8-40,0,60-60-120+60+j*(40+6),40,50*4,40)
+    add(c,'closet')
     end
 --bed
     c=cube(60,50*3,60*8-60-30,60*3.5,50*0.5,60+30)
-    add(c)
-    c=cube(60,50*3+50*0.5,60*8-60-30,6,50*0.5,6); add(c)
-    c=cube(60+60*3.5-6,50*3+50*0.5,60*8-60-30,6,50*0.5,6); add(c)
-    c=cube(60,50*3+50*0.5,60*8-6,6,50*0.5,6); add(c)
-    c=cube(60+60*3.5-6,50*3+50*0.5,60*8-6,6,50*0.5,6); add(c)
+    add(c,'bed')
+    c=cube(60,50*3+50*0.5,60*8-60-30,6,50*0.5,6); add(c,'bed')
+    c=cube(60+60*3.5-6,50*3+50*0.5,60*8-60-30,6,50*0.5,6); add(c,'bed')
+    c=cube(60,50*3+50*0.5,60*8-6,6,50*0.5,6); add(c,'bed')
+    c=cube(60+60*3.5-6,50*3+50*0.5,60*8-6,6,50*0.5,6); add(c,'bed')
 --desktop
     c=cube(-30+60*8-60,50*2.5,60*8-60*2.5-30,60,6,60*2.5)
-    add(c)
+    add(c,'desktop')
     c=cube(60*8-30-60,50*2.5+6,60*8-30-6,60,50*2-6-50*0.5,6)
-    add(c)
+    add(c,'desktop')
     c=cube(60*8-30-60,50*2.5+6,60*8-60*2.5-30,60,50*2-6-50*0.5,60)
-    add(c)
+    add(c,'desktop')
     c=cube(60*8-30-60-6,50*2.5+30,60*8-30-6-30,60,50*2-30-50*0.5,30)
-    add(c)
+    add(c,'computer')
     c=cube(-30+60*8-60+30,50*2.5-50-20+5,60*8-60*2.5,6,50,60+30)
-    add(c)
+    add(c,'screen')
     c=cube(-30+60*8-60+30+6,50*2.5-50+5,60*8-60*2.5+45-15*0.5,6,50-6-5,15)
-    add(c)
+    add(c,'screen')
     c=cube(-30+60*8-60+30+6-10,50*2.5-6,60*8-60*2.5+45-45*0.5,20,6,45)
-    add(c)
+    add(c,'screen')
 --shelf
     for j=0,1 do
     c=cube(60+60+30+15+60*j,50,-180+60*5,4,50*3,30)
-    add(c)
+    add(c,string.format('shelfside%d',j))
     end
     for j=0,5-1 do
     c=cube(60+60+30+15+4,50+50*3/5*j,-180+60*5,60-4,4,30)
-    add(c)
+    add(c,string.format('shelffloor%d',j))
     end
 
 textures={}
@@ -556,6 +562,7 @@ local status, message = love.graphics.validateShader(true, shader_code)
 if status then loveprint(string.format('Shader is valid: %s',status))
 else loveprint(string.format('Shader has problem: %s',message)) end
 
+for i=1+7*6*6,1+7*6*6+6*6 do triangles[i].origy=triangles[i][2]-(50*2.5-30+6) end
 function threed(dt)
     t=t or 0
     local fwd=vec_mul(lookdir,0.25*dt*60*4)
@@ -610,6 +617,13 @@ function threed(dt)
     if images then -- love.load has been called
     diag_update()
     end
+
+    for i=1+7*6*6,1+7*6*6+6*6 do
+        triangles[i][2]=triangles[i][2]+1*60*dt
+        if triangles[i][2]>150+triangles[i].origy then triangles[i][2]=50*2.5-30+6+triangles[i].origy end
+    end
+    mesh = love.graphics.newMesh(vertexFormat, triangles, "triangles", 'static')
+    mesh:attachAttribute("VertexColor", tex)
 end
 
 function mouse_point()
@@ -621,7 +635,7 @@ function mouse_point()
     lastclick=click
     click=love.mouse.isDown(1)
 
-    local vcl={x=sin(turn),y=0,z=cos(turn)}
+    local vcl={x=sin(turn)-(mx/sw-0.5)*0.1,y=(my/sh-0.5)*0.1,z=cos(turn)-(mx/sw-0.5)*0.1}
     local view=170+20+20
     local vcc={x=-camera3d.x-(mx/sw*view-view/2)*(sin(turn-math.pi/2)),y=-camera3d.y+(my/sh*view-view/2),z=-camera3d.z-(mx/sw*view-view/2)*(cos(turn-math.pi/2))}
     --loveprint(vcc.x,vcc.y,vcc.z)
@@ -630,6 +644,7 @@ function mouse_point()
         vcc.y=vcc.y+vcl.y*4
         vcc.z=vcc.z+vcl.z*4
         for i=1,#triangles,6*6 do
+            if i~=1 and i~=1+6*6 then
             local minx,miny,minz={},{},{}
             local maxx,maxy,maxz={},{},{}
             for j=0,6*6-1 do
@@ -647,27 +662,37 @@ function mouse_point()
             local maxy2=math.max(unpack(maxy))
             local maxz2=math.max(unpack(maxz))
             --loveprint(vcc.x,minx2,maxx2)
-            if i~=1 and i~=1+6*6 and
-               vcc.x>minx2 and vcc.x<maxx2 and
+            if vcc.x>minx2 and vcc.x<maxx2 and
                vcc.y>miny2 and vcc.y<maxy2 and
                vcc.z>minz2 and vcc.z<maxz2 then
                 --loveprint(string.format('%d,%d,%d,%d',vcc.x,vcc.y,vcc.z,(i-1)/(6*6)))
+                for i2=1,#triangles,6*6 do
+                if triangles[i2].tag==triangles[i].tag then
                 for k=0,6*6-1 do
-                    textures[i+k]={0,0,0}
+                    textures[i2+k]={0,0,0}
+                end
+                end
                 end
                 get_click((i-1)/(6*6))
                 tex = love.graphics.newMesh(vertexFormat2, textures, 'triangles', 'static')
                 mesh:attachAttribute("VertexColor", tex)
                 return
             end
+            end
         end
     end
 end
 
 function get_click(cb)
-    if click and not lastclick then
+    if click and not lastclick and not cur_section then
     loveprint(cb)
-    if cb==17 then sections={create_section('It\'s a Windows 2024 computer with 999 GB of RAM.','fun but challenging',60*2,nil,nil)}; cur_section=sections[1]; cur_section_i=1 end
+    --if cb==19 then sections={create_section('It\'s a Windows 2024 computer with 999 GB of RAM.','fun but challenging',60*2,nil,nil)}; cur_section=sections[1]; cur_section_i=1 end
+    sections={}
+    for i,v in ipairs(phrases[triangles[1+cb*6*6].tag]) do
+        table.insert(sections,create_section(v[1],v[2],v[3],v[4],v[5]))
+    end
+    --if cur_section and cur_section.vo then audio[cur_section.vo]:stop(); audio[cur_section.vo]=nil end
+    cur_section_i=1; cur_section=sections[cur_section_i]
     end
 end
 

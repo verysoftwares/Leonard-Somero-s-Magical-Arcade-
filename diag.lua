@@ -41,7 +41,7 @@ function voiceover(wav)
     if not audio[wav] then
         audio[wav]=love.audio.newSource(fmt('wares/%s.ogg',wav),'stream')
         audio[wav]:play()
-        local dur = 3.0--audio[wav]:getDuration()
+        local dur = audio[wav]:getDuration()
         tick_dur=dur/#cur_diag
         au_lastcheck=0
         elapsed=0
@@ -97,7 +97,7 @@ function diag_update()
     if cur_section.const then cur_section.const() end
     if cur_section.dur>0 then 
         cur_section.dur=cur_section.dur-1
-        if cur_section.dur==0 then 
+        if cur_section.dur<=0 then 
             cur_diag=''
             diag_split=nil
             diagbox.w=24+128+24

@@ -569,7 +569,7 @@ local status, message = love.graphics.validateShader(true, shader_code)
 if status then loveprint(string.format('Shader is valid: %s',status))
 else loveprint(string.format('Shader has problem: %s',message)) end
 
-for i=1+7*6*6,1+7*6*6+6*6 do triangles[i].origy=triangles[i][2]-(50*2.5-30+6) end
+for i=1+9*6*6,1+9*6*6+6*6 do triangles[i].origy=triangles[i][2]-(50*2.5-30+6) end
 function threed(dt)
     t=t or 0
     local fwd=vec_mul(lookdir,0.25*dt*60*4)
@@ -625,7 +625,7 @@ function threed(dt)
     diag_update()
     end
 
-    for i=1+7*6*6,1+7*6*6+6*6 do
+    for i=1+9*6*6,1+9*6*6+6*6 do
         triangles[i][2]=triangles[i][2]+1*60*dt
         if triangles[i][2]>150+triangles[i].origy then triangles[i][2]=50*2.5-30+6+triangles[i].origy end
     end

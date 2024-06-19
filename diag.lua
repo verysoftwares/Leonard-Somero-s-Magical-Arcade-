@@ -96,7 +96,7 @@ function diag_update()
     if cur_section.dur==cur_section.maxdur and cur_section.init then cur_section.init() end
     if cur_section.const then cur_section.const() end
     if cur_section.dur>0 then 
-        cur_section.dur=cur_section.dur-1
+        cur_section.dur=cur_section.dur-1--.4 when recording with OBS for some reason
         if cur_section.dur<=0 then 
             if cur_section.vo~='legal entity' then
             cur_diag=''

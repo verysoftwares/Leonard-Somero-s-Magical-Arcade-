@@ -19,7 +19,7 @@ phrases={
     ['shelfside']={{'It wouldn\'t be much of a shelf without this.','much of a shelf',60*2+30}},
     ['']={{''}},
 
-    ['desktop']={{'It\'s a Lua table that\'s somehow popped into existence. You see, a common critique of Lua is that \'arrays begin at 1\'. However, what this critique fails to address is that in Lua tables, there\'s no memory pointer arithmetic, so it just makes more intuitive sense to write loops that run from 1 to n rather than 0 to n-1. Besides, the 1-indexing is only for the default iterator \'ipairs\', you can write your own if you really like to begin from 0 (such as when doing modular arithmetic).','Lua table',60*20}},
+    ['desktop']={{'It\'s a Lua table that\'s somehow popped into existence. You see, a common critique of Lua is that \'arrays begin at 1\'. However, what this critique fails to address is that in Lua tables, there\'s no memory pointer arithmetic, so it just makes more intuitive sense to write loops that run from 1 to n rather than 0 to n-1. Besides, the 1-indexing is only for the default iterator \'ipairs\', you can write your own if you really like to begin from 0 (such as when doing modular arithmetic).','Lua table',60*27+30}},
     ['']={{''}},
     -- Segue: Maitreya timer appears, and Leonard communicates with him.
 

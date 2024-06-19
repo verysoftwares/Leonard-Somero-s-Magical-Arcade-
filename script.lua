@@ -14,10 +14,10 @@ phrases={
     -- {'The Future Sound of London','early Aphex Twin','Gas (Mat Jarvis)','Gas (Wolfgang Voigt)'},
     ['']={{''}},
 
-    ['desktop']={{'It\'s a Lua table that\'s somehow popped into existence. You see, a common critique of Lua is that \'arrays begin at 1\'. However, what this critique fails to address is that in Lua tables, there\'s no memory pointer arithmetic, so it just makes more intuitive sense to write loops that run from 1 to n rather than 0 to n-1. Besides, the 1-indexing is only for the default iterator \'ipairs\', you can write your own if you really like to begin from 0 (such as when doing modular arithmetic).',nil,60*6}},
+    ['desktop']={{'It\'s a Lua table that\'s somehow popped into existence. You see, a common critique of Lua is that \'arrays begin at 1\'. However, what this critique fails to address is that in Lua tables, there\'s no memory pointer arithmetic, so it just makes more intuitive sense to write loops that run from 1 to n rather than 0 to n-1. Besides, the 1-indexing is only for the default iterator \'ipairs\', you can write your own if you really like to begin from 0 (such as when doing modular arithmetic).','Lua table',60*20}},
     ['']={{''}},
     -- Segue: Maitreya timer appears, and Leonard communicates with him.
 
-    ['door']={{'How would I know how to open that, I am just a brain in a fish tank.'}},
-    ['certificate']={{'It\'s the document certifying that your game company is a legal entity in Finland!'},{'If it wasn\'t documented, then it wouldn\'t be documented.'}},
+    ['door']={{'How would I know how to open that, I am just a brain in a fish tank.','fish tank',60*3+30}},
+    ['certificate']={{'It\'s the document certifying that your game company is a legal entity in Finland!','legal entity',60*4},{'It\'s the document certifying that your game company is a legal entity in Finland!','fanfare',60*4},{'If it wasn\'t documented, then it wouldn\'t be documented.','wouldn\'t be documented',60*3}},
 }

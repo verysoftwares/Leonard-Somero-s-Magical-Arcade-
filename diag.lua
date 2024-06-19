@@ -98,17 +98,21 @@ function diag_update()
     if cur_section.dur>0 then 
         cur_section.dur=cur_section.dur-1
         if cur_section.dur<=0 then 
+            if cur_section.vo~='legal entity' then
             cur_diag=''
             diag_split=nil
-            diagbox.y=sh-(24+128+24+32)
-            diagbox.w=24+128+24
-            diagbox.h=24+128+24
+            end
             if cur_section.vo then
             audio[cur_section.vo]:stop()
             audio[cur_section.vo]=nil
             end
             cur_section_i=cur_section_i+1
             cur_section=sections[cur_section_i]
+            if not cur_section then
+            diagbox.y=sh-(24+128+24+32)
+            diagbox.w=24+128+24
+            diagbox.h=24+128+24
+            end
             sc_t=t+1
         end
     end

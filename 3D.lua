@@ -457,6 +457,11 @@ local c
 --shower room    
     c=cube(60+60,-50*0.5,-180,60*3,50*4.5,60*5)
     add(c,'showerroom')
+--doors
+    c=cube(-30+60*8-40+32,0,60-60-120+60-2*(40+6)-10,6,50*4,80)
+    add(c,'door')
+    c=cube(-30+60*8-40+32-180+30+1+6,0,60-60-120+60-2*(40+6)-10+60,6,50*4,80)
+    add(c,'door')
 --fridge
     c=cube(60,0,60,60,50*4,60)
     add(c,'fridge')
@@ -499,6 +504,8 @@ local c
     add(c,'screen')
     c=cube(-30+60*8-60+30+6-10,50*2.5-6,60*8-60*2.5+45-45*0.5,20,6,45)
     add(c,'screen')
+    c=cube(-30+60*8-60,50*2.5-6,60*8-60*2.5-30,60,6,30)
+    add(c,'certificate')
 --shelf
     for j=0,1 do
     c=cube(60+60+30+15+60*j,50,-180+60*5,4,50*3,30)
@@ -685,7 +692,7 @@ end
 
 function get_click(cb)
     if click and not lastclick and not cur_section then
-    loveprint(cb)
+    --loveprint(cb)
     --if cb==19 then sections={create_section('It\'s a Windows 2024 computer with 999 GB of RAM.','fun but challenging',60*2,nil,nil)}; cur_section=sections[1]; cur_section_i=1 end
     sections={}
     for i,v in ipairs(phrases[triangles[1+cb*6*6].tag]) do

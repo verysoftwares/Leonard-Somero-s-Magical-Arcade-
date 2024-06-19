@@ -38,6 +38,40 @@ function dialogueprint(diag)
 end
 
 function voiceover(wav)
+    if type(wav)=='table' then
+        if not audio_i then
+            local dur=0
+            for i,v in ipairs(wav) do dur=dur+love.audio.newSource(fmt('wares/%s.ogg',v),'stream'):getDuration() end
+            wav2=wav[1]
+            audio_i=1
+            audio[wav2]=love.audio.newSource(fmt('wares/%s.ogg',wav2),'stream')
+            audio[wav2]:play()
+            tick_dur=dur/#cur_diag
+            au_lastcheck=0
+            elapsed=0
+        else
+            if audio[wav[audio_i]] then
+                if not audio[wav[audio_i]]:isPlaying() then
+                    audio_i=audio_i+1
+                    wav2=wav[audio_i]
+                    if wav2 then
+                        audio[wav2]=love.audio.newSource(fmt('wares/%s.ogg',wav2),'stream')
+                        audio[wav2]:play()                    
+                        au_lastcheck=0
+                        elapsed=0
+                    else
+                        return
+                    end
+                end
+            else return end
+        end
+        local elapsed2=audio[wav2]:tell()
+        elapsed=elapsed+(elapsed2-au_lastcheck)
+        tick=false
+        if elapsed>=tick_dur then elapsed=elapsed-tick_dur; tick=true end
+        au_lastcheck=elapsed2
+        return
+    end
     if not audio[wav] then
         audio[wav]=love.audio.newSource(fmt('wares/%s.ogg',wav),'stream')
         audio[wav]:play()
@@ -54,6 +88,7 @@ function voiceover(wav)
 end
 
 function create_section(dg,vo,dur,init,const)
+    dur=dur or 0
     return {
         dg=dg,
         vo=vo,
@@ -102,10 +137,11 @@ function diag_update()
             cur_diag=''
             diag_split=nil
             end
-            if cur_section.vo then
+            if cur_section.vo and type(cur_section.vo)~='table' then
             audio[cur_section.vo]:stop()
             audio[cur_section.vo]=nil
             end
+            audio_i=nil
             cur_section_i=cur_section_i+1
             cur_section=sections[cur_section_i]
             if not cur_section then
@@ -161,7 +197,10 @@ function diag_draw()
         lg.print(sub(row[1],1,row.c),tx,ty)
         ty=ty+fonts.main2:getHeight(row[1])
         if row.c<#row[1] then 
-            if string.find('aeiouyAEIOUY',sub(row[1],row.c,row.c)) then him=images.he_talcc else him=images.he_thincc end
+            local char=sub(row[1],row.c,row.c)
+            if char~='(' and char~=')' and char~='[' and char~=']' then
+            if string.find('aeiouyAEIOUY',char) then him=images.he_talcc else him=images.he_thincc end
+            end
             if tick then row.c=row.c+1 end
             break
         else him=images.he_thincc end

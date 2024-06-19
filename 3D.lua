@@ -509,7 +509,7 @@ local c
 --shelf
     for j=0,1 do
     c=cube(60+60+30+15+60*j,50,-180+60*5,4,50*3,30)
-    add(c,string.format('shelfside%d',j))
+    add(c,'shelfside')
     end
     for j=0,5-1 do
     c=cube(60+60+30+15+4,50+50*3/5*j,-180+60*5,60-4,4,30)
@@ -695,8 +695,24 @@ function get_click(cb)
     --loveprint(cb)
     --if cb==19 then sections={create_section('It\'s a Windows 2024 computer with 999 GB of RAM.','fun but challenging',60*2,nil,nil)}; cur_section=sections[1]; cur_section_i=1 end
     sections={}
-    for i,v in ipairs(phrases[triangles[1+cb*6*6].tag]) do
+    local diag=phrases[triangles[1+cb*6*6].tag]
+    if diag.shelf1 then
+        local sel={}
+        local sel2={}
+        for i,v in ipairs(diag.shelf2) do table.insert(sel2,v) end
+        for i=1,3 do local r=math.random(1,#sel2); table.insert(sel,sel2[r]); table.remove(sel2,r) end
+        local out=diag.shelf1..' '
+        for i,v in ipairs(sel) do out=out..v..', ' end
+        out=string.sub(out,1,#out-2)
+        out=out..' '..diag.shelf3
+        table.insert(sel,1,'this shelf houses')
+        table.insert(sel,#sel+1,'type of music')
+        table.insert(sections,create_section(out,sel,60*7,diag[4],diag[5]))
+        --loveprint(sections[#sections].dur)
+    else
+    for i,v in ipairs(diag) do
         table.insert(sections,create_section(v[1],v[2],v[3],v[4],v[5]))
+    end
     end
     --if cur_section and cur_section.vo then audio[cur_section.vo]:stop(); audio[cur_section.vo]=nil end
     cur_section_i=1; cur_section=sections[cur_section_i]

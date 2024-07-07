@@ -7,5 +7,7 @@ Leonard: I'll call him.
 (timer runs out)
 Leonard: Maitreya, status?
 Maitreya: Leonard, määhän oon aina kohellu sua hyvin.
+    Subtitle: Leonard, I've always treated you well.
 Leonard: Why did you cut me off?
 Maitreya: Tieto lisää dukkhaa.
+    Subtitle: Knowledge adds to dukkha (suffering).

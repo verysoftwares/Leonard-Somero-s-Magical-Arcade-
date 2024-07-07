@@ -6,6 +6,7 @@ Leonard: I'll call him.
 (first instance of Maitreya timer)
 (timer runs out)
 Leonard: Maitreya, status?
+(switch to FMV)
 Maitreya: Leonard, määhän oon aina kohellu sua hyvin.
     Subtitle: Leonard, I've always treated you well.
 Leonard: Then why did you cut me off?
@@ -19,3 +20,5 @@ Maitreya: Ollaan tehty kaikki nää pelit, kannattaa pelata niitä.
 Leonard: But I don't remember where I put them.
 Maitreya: Heippa.
     Subtitle: Bye now.
+(FMV ends)
+(diskettes appear in the apartment)

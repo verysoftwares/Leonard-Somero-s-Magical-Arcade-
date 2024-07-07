@@ -642,7 +642,7 @@ function mouse_point()
     lastclick=click
     click=love.mouse.isDown(1)
 
-    local vcl={x=sin(turn)-(mx/sw-0.5)*0.1,y=(my/sh-0.5)*0.1,z=cos(turn)-(mx/sw-0.5)*0.1}
+    local vcl={x=sin(turn)-(mx/sw-0.5)*0.1*(sin(turn-math.pi/2)),y=(my/sh-0.5)*0.1,z=cos(turn)-(mx/sw-0.5)*0.1*(cos(turn-math.pi/2))}
     local view=170+20+20
     local vcc={x=-camera3d.x-(mx/sw*view-view/2)*(sin(turn-math.pi/2)),y=-camera3d.y+(my/sh*view-view/2),z=-camera3d.z-(mx/sw*view-view/2)*(cos(turn-math.pi/2))}
     --loveprint(vcc.x,vcc.y,vcc.z)

@@ -11,3 +11,11 @@ Maitreya: Leonard, määhän oon aina kohellu sua hyvin.
 Leonard: Why did you cut me off?
 Maitreya: Tieto lisää dukkhaa.
     Subtitle: Knowledge adds to dukkha (suffering).
+Leonard: Well, what doesn't add to dukkha?
+Maitreya: Videopelit.
+    Subtitle: Video games.
+Maitreya: Ollaan tehty kaikki nää pelit, kannattaa pelata niitä.
+    Subtitle: We've made all these games, they're worth playing.
+Leonard: But I don't remember where I put them.
+Maitreya: Heippa.
+    Subtitle: Bye now.

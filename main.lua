@@ -6,6 +6,7 @@ require 'load'
 require 'diag'
 require 'script'
 require '3D'
+require 'title'
 require 'slick-slices'
 require 'life-of-tree'
 require 'pocketbolo'
@@ -499,3 +500,6 @@ end
 -- version 1.b
 love.update=threed
 love.draw=gpu_render
+
+-- version 1.c (January 2025)
+title_start()

@@ -563,13 +563,35 @@ vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords)
 #endif
 ]]
 threed_shader=love.graphics.newShader(shader_code)
+local shader_code2=[[
+#ifdef VERTEX
+uniform mat4 proj;
+uniform mat4 rotX;
+uniform vec4 camera3d;
+vec4 position(mat4 transform_projection, vec4 vertex_position)
+{
+    return proj * (vertex_position * rotX + camera3d * rotX);
+}
+#endif
+
+#ifdef PIXEL
+//uniform Image tex2;
+uniform Image tex3;
+uniform float t;
+vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords)
+{
+    return Texel(tex3, texture_coords); 
+}
+#endif
+]]
+threed_shader2=love.graphics.newShader(shader_code2)
 
 local status, message = love.graphics.validateShader(true, shader_code)
 
 if status then loveprint(string.format('Shader is valid: %s',status))
 else loveprint(string.format('Shader has problem: %s',message)) end
 
-for i=1+9*6*6,1+9*6*6+6*6 do triangles[i].origy=triangles[i][2]-(50*2.5-30+6) end
+for i=1+9*6*6,1+9*6*6+6*6-1 do triangles[i].origy=triangles[i][2]-(50*2.5-30+6) end
 function threed(dt)
     t=t or 0
     local fwd=vec_mul(lookdir,0.25*dt*60*4)
@@ -625,7 +647,7 @@ function threed(dt)
     diag_update()
     end
 
-    for i=1+9*6*6,1+9*6*6+6*6 do
+    for i=1+9*6*6,1+9*6*6+6*6-1 do
         triangles[i][2]=triangles[i][2]+1*60*dt
         if triangles[i][2]>150+triangles[i].origy then triangles[i][2]=50*2.5-30+6+triangles[i].origy end
     end
@@ -642,9 +664,13 @@ function mouse_point()
     lastclick=click
     click=love.mouse.isDown(1)
 
-    local vcl={x=sin(turn)-(mx/sw-0.5)*0.1*(sin(turn-math.pi/2)),y=(my/sh-0.5)*0.1,z=cos(turn)-(mx/sw-0.5)*0.1*(cos(turn-math.pi/2))}
-    local view=170+20+20
-    local vcc={x=-camera3d.x-(mx/sw*view-view/2)*(sin(turn-math.pi/2)),y=-camera3d.y+(my/sh*view-view/2),z=-camera3d.z-(mx/sw*view-view/2)*(cos(turn-math.pi/2))}
+    local vcl={x=sin(turn),
+               y=(my/sh-0.5)*0.1,
+               z=cos(turn)}
+    local view=170+20+20-40
+    local vcc={x=-camera3d.x-(mx/sw*view-view/2)*(sin(turn-math.pi/2)),
+               y=-camera3d.y+(my/sh*view-view/2),
+               z=-camera3d.z-(mx/sw*view-view/2)*(cos(turn-math.pi/2))}
     --loveprint(vcc.x,vcc.y,vcc.z)
     for i=0,30 do
         vcc.x=vcc.x+vcl.x*4

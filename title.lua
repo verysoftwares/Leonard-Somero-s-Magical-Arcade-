@@ -29,7 +29,10 @@ end
     --test_tex4c:setVolume(0)
     --test_tex4b:play()
     --test_tex4c:play()
-    local test_tex5=love.graphics.newCanvas(924,926)
+    test_tex5=love.graphics.newCanvas(924,926)
+    local test_tex7=love.graphics.newVideo('promo/slick-slices.ogv')
+    local test_tex8=love.graphics.newVideo('promo/bug-castle.ogv')
+    local test_tex9=love.graphics.newVideo('promo/psy-ball.ogv')
 
 function title_draw()
     love.graphics.setCanvas({{canvas},stencil=true,depth=true})
@@ -145,8 +148,9 @@ function title_draw()
 end
 
 function texture_stream()
-    local tex={test_tex4,test_tex4,test_tex4b,test_tex4,test_tex4c}
+    local tex={test_tex4,test_tex8,test_tex4b,test_tex9,test_tex7}
     local ct=tex[math.floor((t*0.08)%#tex+1)]
+    if not (ct:getWidth()==test_tex5:getWidth()) then test_tex5=love.graphics.newCanvas(ct:getWidth(),ct:getHeight()) end
     for i,tx in ipairs(tex) do if not (tx==test_tex6b) then tx:pause() end end
     if ct==test_tex6b then return ct end
     ct:play()

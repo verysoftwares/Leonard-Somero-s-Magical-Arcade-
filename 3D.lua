@@ -30,7 +30,7 @@ function gpu_render()
     --threed_shader:send('tex2',ct)
     --threed_shader:send('tex2',test_tex)
     threed_shader:send('tex3',test_tex)
-    threed_shader:send('t',t*0.02)
+    threed_shader:send('drift',(t*0.02*0.2)%1)
 
     love.graphics.setColor(1,1,1)
     love.graphics.draw(mesh,0,0)
@@ -540,7 +540,7 @@ vec4 position(mat4 transform_projection, vec4 vertex_position)
 #ifdef PIXEL
 //uniform Image tex2;
 uniform Image tex3;
-uniform float t;
+uniform float drift;
 vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords)
 {
     vec4 texturecolor=color;
@@ -552,7 +552,7 @@ vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords)
         while(texture_coords.x>1.0) {
             texture_coords.x=texture_coords.x-1.0;
         }
-        texture_coords.y=texture_coords.y*2.0+t*0.2;
+        texture_coords.y=texture_coords.y*2.0+drift;
         while(texture_coords.y>1.0) {
             texture_coords.y=texture_coords.y-1.0;
         }

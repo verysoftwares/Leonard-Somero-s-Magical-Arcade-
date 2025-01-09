@@ -17,24 +17,25 @@ function title_update()
     t=t+1
 end
 
-local test_tex4=love.graphics.newVideo('promo/momentum.ogv')
-local test_tex4b=love.graphics.newVideo('promo/multiple-maze.ogv')
-local test_tex4c=love.graphics.newVideo('promo/rowbyrow-1.ogv')
-local cur_test_tex=test_tex4
---test_tex4:play()
---test_tex4b:setVolume(0)
---test_tex4c:setVolume(0)
---test_tex4b:play()
---test_tex4c:play()
-local test_tex5=love.graphics.newCanvas(924,926)
+-- TEXTURE STREAM
+    local test_tex4=love.graphics.newVideo('promo/momentum.ogv')
+    local test_tex4b=love.graphics.newVideo('promo/multiple-maze.ogv')
+    local test_tex4c=love.graphics.newVideo('promo/rowbyrow-1.ogv')
+    --local test_tex6=love.graphics.newVideo('promo/2025-01-08_13-43-02.ogv')
+    --local test_tex6b=love.graphics.newImage('promo/5.5BF.png')
+    local cur_test_tex=test_tex4
+    --test_tex4:play()
+    --test_tex4b:setVolume(0)
+    --test_tex4c:setVolume(0)
+    --test_tex4b:play()
+    --test_tex4c:play()
+    local test_tex5=love.graphics.newCanvas(924,926)
+
 function title_draw()
     love.graphics.setCanvas({{canvas},stencil=true,depth=true})
     love.graphics.clear(0.0122*14,0.012*14,0.025*14)
 
-    local tex={test_tex4,test_tex4,test_tex4b,test_tex4,test_tex4c}
-    local ct=tex[math.floor((t*0.08)%#tex+1)]    
-    for i,tx in ipairs(tex) do tx:pause() end
-    ct:play()
+    local ct=texture_stream()
 
     threed_shader:send('proj',projmat2)
     threed_shader:send('rotX',matrotX)
@@ -50,7 +51,7 @@ function title_draw()
     love.graphics.setCanvas({{canvas},stencil=true,depth=true})
     love.graphics.setShader(threed_shader)
     threed_shader:send('tex3',test_tex5)
-    threed_shader:send('t',t*0.02)
+    threed_shader:send('drift',(t*0.02*0.2)%1)
 
     love.graphics.setColor(1,1,1)
     love.graphics.draw(mesh,0,0)
@@ -142,3 +143,14 @@ function title_draw()
     love.graphics.setColor(1,1,1)
     love.graphics.draw(canvas)
 end
+
+function texture_stream()
+    local tex={test_tex4,test_tex4,test_tex4b,test_tex4,test_tex4c}
+    local ct=tex[math.floor((t*0.08)%#tex+1)]
+    for i,tx in ipairs(tex) do if not (tx==test_tex6b) then tx:pause() end end
+    if ct==test_tex6b then return ct end
+    ct:play()
+    return ct
+end
+
+--loveprint(type(test_tex4))

@@ -1,6 +1,6 @@
 local vertexFormat = {
-    {"VertexPosition", "float", 3},
-    {"VertexTexCoord", "float", 2},
+    {'VertexPosition', 'float', 3},
+    {'VertexTexCoord', 'float', 2},
 }
 local vertexFormat2 = {
     {'VertexColor','float',3},
@@ -432,8 +432,8 @@ function cube(x,y,z,w,h,d)
     point(x+w,y,z+d,0,0), point(x,y+h,z+d,1,1), point(x,y,z+d,0,1),
 
     --west face
-    point(x,y+h,z+d,1,0), point(x,y,z+d,0,0), point(x,y+h,z,1,1),
-    point(x,y+h,z,1,1), point(x,y,z+d,0,0), point(x,y,z,0,1),
+    point(x,y+h,z+d,0,1), point(x,y,z+d,0,0), point(x,y+h,z,1,1),
+    point(x,y+h,z,1,1), point(x,y,z+d,0,0), point(x,y,z,1,0),
 
     --top face
     point(x,y+h,z+d,0,1), point(x,y+h,z,0,0), point(x+w,y+h,z+d,1,1),
@@ -500,6 +500,7 @@ local c
     add(c,'computer')
     c=cube(-30+60*8-60+30,50*2.5-50-20+5,60*8-60*2.5,6,50,60+30)
     add(c,'screen')
+    local playable=#triangles-18
     c=cube(-30+60*8-60+30+6,50*2.5-50+5,60*8-60*2.5+45-15*0.5,6,50-6-5,15)
     add(c,'screen')
     c=cube(-30+60*8-60+30+6-10,50*2.5-6,60*8-60*2.5+45-45*0.5,20,6,45)
@@ -517,13 +518,13 @@ local c
     end
 
 textures={}
-for i=1,#triangles do table.insert(textures,{0,0,1}) end
+for i=1,#triangles do if i>=playable+1 and i<=playable+6 then table.insert(textures,{1,0,0}) else table.insert(textures,{0,0,1}) end end
 
-mesh = love.graphics.newMesh(vertexFormat, triangles, "triangles", 'static')
+mesh = love.graphics.newMesh(vertexFormat, triangles, 'triangles', 'static')
 tex = love.graphics.newMesh(vertexFormat2, textures, 'triangles', 'static')
 
 -- enable pixel shader
-mesh:attachAttribute("VertexColor", tex)
+mesh:attachAttribute('VertexColor', tex)
     
 -- shader with both a vertex and pixel component
 local shader_code=[[
@@ -548,11 +549,12 @@ vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords)
         texturecolor=vec4(0.8,0.8,0.4,1);
     }
     if (color.b>=1.0-0.1) { 
-        texture_coords.x=texture_coords.x*2.0;
+        //texture_coords.x=texture_coords.x*2.0;
         while(texture_coords.x>1.0) {
             texture_coords.x=texture_coords.x-1.0;
         }
-        texture_coords.y=texture_coords.y*2.0+drift;
+        //texture_coords.y=texture_coords.y*2.0+drift;
+        texture_coords.y=texture_coords.y+drift;
         while(texture_coords.y>1.0) {
             texture_coords.y=texture_coords.y-1.0;
         }
@@ -575,18 +577,29 @@ vec4 position(mat4 transform_projection, vec4 vertex_position)
 #endif
 
 #ifdef PIXEL
-//uniform Image tex2;
+uniform Image tex2;
 uniform Image tex3;
-uniform float t;
+uniform float drift;
 vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords)
 {
-    return Texel(tex3, texture_coords); 
+    if (color.r>=1.0-0.1) { return Texel(tex3, texture_coords); }
+    if (color.b>=1.0-0.1) {
+        texture_coords.x=texture_coords.x*2.0;
+        while(texture_coords.x>1.0) {
+            texture_coords.x=texture_coords.x-1.0;
+        }
+        texture_coords.y=texture_coords.y*2.0+drift;
+        while(texture_coords.y>1.0) {
+            texture_coords.y=texture_coords.y-1.0;
+        }
+        return Texel(tex2, texture_coords); 
+    }
 }
 #endif
 ]]
 threed_shader2=love.graphics.newShader(shader_code2)
 
-local status, message = love.graphics.validateShader(true, shader_code)
+local status, message = love.graphics.validateShader(true, shader_code2)
 
 if status then loveprint(string.format('Shader is valid: %s',status))
 else loveprint(string.format('Shader has problem: %s',message)) end
@@ -656,9 +669,9 @@ function threed(dt)
 end
 
 function mouse_point()
-    for i=1,#textures do textures[i]={0,0,1} end
-    tex = love.graphics.newMesh(vertexFormat2, textures, 'triangles', 'static')
-    mesh:attachAttribute("VertexColor", tex)
+    --for i=1,#textures do textures[i]={0,0,1} end
+    --tex = love.graphics.newMesh(vertexFormat2, textures, 'triangles', 'static')
+    --mesh:attachAttribute("VertexColor", tex)
 
     local mx,my=love.mouse.getPosition()
     lastclick=click

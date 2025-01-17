@@ -1,22 +1,23 @@
 function title_start()
     love.update=title_update
     love.draw=title_draw
-    turn=pi/2+pi/4
+    turn=pi/2+pi/4-pi/8
     matrotX=mat_rotY(turn)
-    camera3d.x=camera3d.x-210
-    camera3d.y=camera3d.y-10
-    camera3d.z=camera3d.z+20
+    camera3d.x=camera3d.x-210-20
+    camera3d.y=camera3d.y-10-10
+    camera3d.z=camera3d.z+20+10
     title_font1=love.graphics.newFont('wares/Pop Core.ttf',88)
     title_font2=love.graphics.newFont('wares/Pop Core.ttf',42+22)
     title_font3=love.graphics.newFont('wares/Pop Core.ttf',160-12+6)
-    musa=love.audio.newSource('promo/lennu-levitates.ogg','stream')
-    musa:setLooping(true)
-    musa:play()
+    --musa=love.audio.newSource('promo/lennu-levitates.ogg','stream')
+    --musa:setLooping(true)
+    --musa:play()
 end
 
 function title_update()
-    turn=pi/2+pi/4+sin(t*0.006)
+    --turn=pi/2+pi/4+sin(t*0.006)
     matrotX=mat_rotY(turn)
+    game.update()
     t=t+1
 end
 
@@ -49,19 +50,24 @@ function title_draw()
     love.graphics.setCanvas({{canvas},stencil=true,depth=true})
     love.graphics.clear(0.0122*14,0.012*14,0.025*14)
 
-    local ct=texture_stream()
+    --local ct=texture_stream()
+    game.draw()
 
     threed_shader2:send('proj',projmat2)
     threed_shader2:send('rotX',matrotX)
     --loveprint(camera3d.x,camera3d.y,camera3d.z)
-    threed_shader2:send('camera3d',{camera3d.x+sin(t*0.02)*25,camera3d.y+sin(t*0.02)*25,camera3d.z+sin(t*0.02)*25,0})
+    --threed_shader2:send('camera3d',{camera3d.x+sin(t*0.02)*25,camera3d.y+sin(t*0.02)*25,camera3d.z+sin(t*0.02)*25,0})
+    threed_shader2:send('camera3d',{camera3d.x,camera3d.y,camera3d.z,0})
     --local tex={test_tex,test_tex2,test_tex3,test_tex4}
     --local ct=tex[math.floor((t*0.08)%4+1)]    
     --ct=cube_tex[math.floor((t*0.08)%7+1)]
     --threed_shader:send('tex2',ct)
     --threed_shader:send('tex2',test_tex)
+    if not (test_tex5:getWidth()==game.canvas:getWidth()) then test_tex5=lg.newCanvas(game.canvas:getWidth(),game.canvas:getHeight()) end
     love.graphics.setCanvas(test_tex5)
-    love.graphics.draw(test_tex4)
+    --love.graphics.draw(ct)
+    --love.graphics.draw(test_tex7)
+    love.graphics.draw(game.canvas)
     love.graphics.setCanvas({{canvas},stencil=true,depth=true})
     love.graphics.setShader(threed_shader2)
     threed_shader2:send('tex2',test_tex)
@@ -81,6 +87,13 @@ function title_draw()
     -- VIDEO PREVIEW
         --love.graphics.draw(test_tex4)
         --love.graphics.draw(test_tex5)
+
+    if 1 then 
+        love.graphics.setCanvas()
+        love.graphics.setColor(1,1,1)
+        love.graphics.draw(canvas)
+        return
+    end
 
     love.graphics.setFont(title_font2)
     --love.graphics.print('Leonard Somero\'s',0,120)
@@ -162,7 +175,7 @@ end
 
 local tex={test_tex4,test_tex8,test_tex4b,test_tex9,test_tex7}
 function texture_stream()
-    local ct=tex[1]--tex[math.floor((t*0.08)%#tex+1)]
+    local ct=tex[#tex]--tex[math.floor((t*0.08)%#tex+1)]
     if not (ct:getWidth()==test_tex5:getWidth()) then test_tex5=love.graphics.newCanvas(ct:getWidth(),ct:getHeight()) end
     for i,tx in ipairs(tex) do if tx:typeOf('Video') then tx:pause() end end
     if not ct:typeOf('Video') then return ct end

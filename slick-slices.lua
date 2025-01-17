@@ -518,7 +518,7 @@ end
 
 -- Drawing
 function slick_draw()    
-    love.graphics.setCanvas(canvas)
+    love.graphics.setCanvas(ss_canvas)
     love.graphics.clear()
     love.graphics.setColor(255/255,255/255,255/255)
 
@@ -553,7 +553,7 @@ function slick_draw()
     love.graphics.setCanvas(game.canvas)
     love.graphics.clear(gui.bg.r,gui.bg.g,gui.bg.b)
 
-    love.graphics.draw(canvas, gui.canvas.x, gui.canvas.y, 0, gui.scale, gui.scale)
+    love.graphics.draw(ss_canvas, gui.canvas.x, gui.canvas.y, 0, gui.scale, gui.scale)
     if scene.rec and scene.t%2==0 then
         local screenshot = love.graphics.newScreenshot();
         screenshot:encode('png', os.time() .. '-' .. scene.t .. '.png');
@@ -565,9 +565,9 @@ function slick_load(arg)
     hospice = {}
     r,g,b=255,250,200
 
-    canvas = nil
-    canvas2 = nil
-    sw,sh = nil,nil
+    ss_canvas = nil
+    --canvas2 = nil
+    --sw,sh = nil,nil
 
     slick_images = {}  -- auto-fetched at loading time from the assets folder
     origimg = {}
@@ -616,7 +616,7 @@ function winresize()
     gui.sw, gui.sh = 12*26*2,12*21*2
     gui.rw = gui.sw;    gui.rh = gui.sh;
     gui.sw = gui.sw/gui.scale;    gui.sh = gui.sh/gui.scale;
-    canvas = love.graphics.newCanvas(gui.sw, gui.sh)
+    ss_canvas = love.graphics.newCanvas(gui.sw, gui.sh)
 end
 
 function sayer(me)
@@ -779,7 +779,7 @@ function slick_reset()
     gui.bg.g = palette[1].g
     gui.bg.b = palette[1].b
     love.graphics.setBackgroundColor(gui.bg.r, gui.bg.g, gui.bg.b)
-    love.graphics.setCanvas(canvas)
+    love.graphics.setCanvas(ss_canvas)
     love.graphics.clear()
     love.graphics.setCanvas()
 

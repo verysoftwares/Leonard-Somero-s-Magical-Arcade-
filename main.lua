@@ -7,6 +7,7 @@ require 'diag'
 require 'script'
 require '3D'
 require 'title'
+
 require 'slick-slices'
 require 'life-of-tree'
 require 'pocketbolo'
@@ -14,6 +15,8 @@ require 'psy-ball'
 require 'batch-3'
 require 'apoplex'
 require 'dropplet'
+
+require 'computer'
 
 cat_paws=0
 t=0

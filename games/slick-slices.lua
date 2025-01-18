@@ -599,7 +599,7 @@ function slick_load(arg)
     muse = love.audio.newSource("wares/slick-slices-assets/music.ogg", "static")
     muse:setVolume(0.8)
     muse:setLooping(true)
-    --muse:play()
+    muse:play()
     cur_audio=muse
 
     winresize()

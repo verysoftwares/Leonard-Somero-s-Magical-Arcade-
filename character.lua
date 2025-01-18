@@ -31,7 +31,7 @@ function character_draw()
     lg.rectangle('fill',diagbox.x+4,diagbox.y+4,12,diagbox.h-8)
     lg.rectangle('fill',diagbox.x+4+12,diagbox.y+4,diagbox.w-8-8-4,12)
     local mphas,mphad
-    if not (i==3) and not (t%128<64) then
+    if not (i==3) then --and not (t%128<64) then
         fg(0,0,0)
         lg.draw(mp_label,diagbox.x+8-1,diagbox.y+diagbox.h-16-2)
         lg.draw(mp_label,diagbox.x+8+1,diagbox.y+diagbox.h-16-2)
@@ -64,7 +64,7 @@ function character_draw()
         lg.rectangle('fill',rx,ry,rw*mphas/mphad,rh)
         end
     if i==2 then
-        if t%128<64 then
+        if false then--t%128<64 then
         fg(0,0,0)
         lg.draw(emblem3,diagbox.x+4+1,diagbox.y+4)
         lg.draw(emblem3,diagbox.x+4-1,diagbox.y+4)
@@ -94,7 +94,7 @@ function character_draw()
         end
     end
     if i==1 then
-        if t%128<64 then
+        if false then--t%128<64 then
         fg(0,0,0)
         lg.draw(emblem2,diagbox.x+4+1,diagbox.y+4)
         lg.draw(emblem2,diagbox.x+4-1,diagbox.y+4)
@@ -124,7 +124,7 @@ function character_draw()
         end
     end
     if i==0 then
-        if t%128<64 then
+        if false then--t%128<64 then
         fg(0,0,0)
         lg.draw(emblem,diagbox.x+4+1,diagbox.y+4)
         lg.draw(emblem,diagbox.x+4-1,diagbox.y+4)

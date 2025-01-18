@@ -8,7 +8,7 @@ require 'script'
 require '3D'
 require 'title'
 
-require 'slick-slices'
+require 'games/slick-slices'
 require 'life-of-tree'
 require 'pocketbolo'
 require 'psy-ball'
@@ -17,6 +17,7 @@ require 'apoplex'
 require 'dropplet'
 
 require 'computer'
+require 'character'
 
 cat_paws=0
 t=0

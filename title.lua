@@ -80,6 +80,19 @@ function title_draw()
     love.graphics.setShader()
     --love.graphics.print(string.format('(%d,%d,%d,%s)',camera3d.x,camera3d.y,camera3d.z,totime(t)))
 
+    lg.setCanvas(canvas)
+    character_draw()
+
+    --[[
+    lg.setColor(0,0,0,1)
+    lg.draw(emblem,-1,0)
+    lg.draw(emblem,1,0)
+    lg.draw(emblem,0,-1)
+    lg.draw(emblem,0,1)
+    lg.setColor(1,1,1,1)
+    lg.draw(emblem)
+    ]]
+
     if images then -- love.load has been called
         diag_draw()
     end
@@ -90,11 +103,12 @@ function title_draw()
 
     if 1 then 
         love.graphics.setCanvas()
-        love.graphics.setColor(1,1,1)
+        love.graphics.setColor(1,1,1,1)
         love.graphics.draw(canvas)
         return
     end
 
+    love.graphics.setCanvas(canvas)
     love.graphics.setFont(title_font2)
     --love.graphics.print('Leonard Somero\'s',0,120)
     local r,g,b=HSL(t*2%256,240,240)

@@ -1,12 +1,17 @@
 (inspecting desktop)
 Leonard: It's a Lua table that's somehow popped into existence. You see, a common critique of Lua is that 'arrays begin at 1'. However, what this critique fails to address is that in Lua tables, there's no memory pointer arithmetic, so it just makes more intuitive sense to write loops that run from 1 to n rather than 0 to n-1. Besides, the 1-indexing--
 Maitreya: Stop.
+
 Leonard: ...
 Leonard: I'll call him.
+
 (first instance of Maitreya timer)
 (timer runs out)
+
 Leonard: Maitreya, status?
+
 (switch to FMV)
+
 Maitreya: Leonard, määhän oon aina kohellu sua hyvin. / Leonard, I've always treated you well.
 Leonard: Then why did you cut me off?
 Maitreya: Tieto lisää dukkhaa. / Knowledge adds to dukkha (suffering).
@@ -14,6 +19,8 @@ Leonard: Well, what doesn't add to dukkha?
 Maitreya: Videopelit. / Video games.
 Maitreya: Ollaan tehty kaikki nää pelit, kannattaa pelata niitä. / We've made all these games, they're worth playing.
 Leonard: But I don't remember where I put them.
-Maitreya: Joo heippa. / Bye now.
+Maitreya: Alapa ettiä. / Start looking then.
+
 (FMV ends)
-(diskettes appear in the apartment)
+
+(some diskettes appear in the apartment)

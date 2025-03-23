@@ -727,8 +727,15 @@ function spawn()
 end
 
 function tap(me)
+    if t-ss_t==60 then
+        if not cur_script.intro.seen then start_script('intro')
+        else start_script('intro2') end
+    end
+    diag_update()
+
     if check and tapped("z") then
         --scene.dj.turnitdown = true
+        ss_t=t+1
         stop()
         if active.i==0 then 
             if amplaying ~= nil then amplaying:stop() end
@@ -796,4 +803,5 @@ function slick_reset()
     score=0
     check=true
     scene.dj.turnitup = true
+    ss_t=t
 end

@@ -468,9 +468,9 @@ local c
 --kitchen table
     c=cube(60,50*2.5,60-60-120,60,50*1.5,60*3)
     add(c,'kitchentable')
---faucet
     c=cube(-30,50*2.5,60-60-120-60,60*2+30,50*1.5,60)
     add(c,'kitchentable')
+--faucet
     c=cube(-30+60,50*2.5-30,60-60-120-60+20,6,6,30)
     add(c,'faucet')
     c=cube(-30+60,50*2.5-30+6,60-60-120-60+20,6,30-6,6)

@@ -3,10 +3,9 @@ require 'utility'
 require 'TIC-boilerplate'
 require 'perlin'
 require 'load'
-require 'diag'
+require 'dialogue'
 require 'script'
 require '3D'
-require 'title'
 
 require 'games/slick-slices'
 require 'life-of-tree'
@@ -18,6 +17,8 @@ require 'dropplet'
 
 require 'computer'
 require 'character'
+require 'demomode'
+require 'title'
 
 cat_paws=0
 t=0

@@ -26,3 +26,31 @@ phrases={
     ['door']={{'How would I know how to open that, I am just a brain in a fish tank.','fish tank',60*3+30}},
     ['certificate']={{'It\'s the document certifying that your game company is a legal entity in Finland!','legal entity',60*4},{'It\'s the document certifying that your game company is a legal entity in Finland!','fanfare',60*4},{'If it wasn\'t documented, then it wouldn\'t be documented.','wouldn\'t be documented',60*3}},
 }
+
+bigass_script_table={
+    ['Slick Slices']={
+        ['Leonard']={
+            ['intro']={{'It seems to crave a Z press.','crave Z',60*3.5}},
+            ['introfail']={{'Uhh that\'s not exactly Z, but nice try.'}},
+            ['intro2']={{'Now it is hungry for more.','hungry Z',60*3.5}},
+            ['perfect']={{'The pieces matched perfectly!'},{'I am the king of Z presses.'}},
+            ['imperfect']={{'Okay, the pieces were a little misaligned.'},{'Now it gave me a shorter piece.'}},
+            ['imperfect2']={{'So the pieces keep getting shorter as I go.'}},
+            ['bigimperfect']={{'Whoops, I mispressed.'}},
+            ['gameover']={{'And now I don\'t have a piece at all.'},{'Just look at that score...'},{'I think I can do better next time, so I\'ll just press R to retry.'}},
+            ['pressRlate']={{'I\'m just gonna press R any moment now.'}}
+        },
+    },
+}
+
+cur_script=bigass_script_table['Slick Slices']['Leonard']
+function start_script(id)
+    local diag=cur_script[id]
+    if diag.seen then return end
+    sections={}
+    for i,v in ipairs(diag) do
+        table.insert(sections,create_section(v[1],v[2],v[3],v[4],v[5]))
+    end
+    cur_section_i=1; cur_section=sections[cur_section_i]
+    diag.seen=true
+end

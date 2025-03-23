@@ -11,4 +11,6 @@ function start_game(id)
     end
 end
 
-start_game('Slick Slices')
+--if demomode==5 then
+--start_game('Slick Slices')
+--end
